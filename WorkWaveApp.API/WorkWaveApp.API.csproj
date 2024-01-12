@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WorkWaveApp.Infrastructure\WorkWaveApp.Infrastructure.csproj" />
+    <ProjectReference Include="..\WorkWaveApp.Models\WorkWaveApp.Models.csproj" />
   </ItemGroup>
 
 </Project>
