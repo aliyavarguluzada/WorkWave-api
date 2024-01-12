@@ -3,9 +3,58 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8698C254-E9D7-4249-B25D-4F7DC33657A6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{3459116D-C0CA-44CA-85A0-48D3A8789F31}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{06A4BE9B-9199-4542-8530-89AA664EF820}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkWaveApp.Models", "WorkWaveApp.Models\WorkWaveApp.Models.csproj", "{3C236758-2CDD-41E3-8F2D-286613B4AE64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkWaveApp.Infrastructure", "WorkWaveApp.Infrastructure\WorkWaveApp.Infrastructure.csproj", "{0FE60908-7FE5-4153-9CAE-9194EFA78C79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkWaveApp.Domain", "WorkWaveApp.Domain\WorkWaveApp.Domain.csproj", "{7F1892E1-A78C-4C6A-9BB4-58AED526502A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkWaveApp.Application", "WorkWaveApp.Application\WorkWaveApp.Application.csproj", "{32705E4C-B6BA-4B8D-AAF0-675BED46C2DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkWaveApp.API", "WorkWaveApp.API\WorkWaveApp.API.csproj", "{3700E760-348E-4E9D-9A14-2AC94B33F2AE}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3C236758-2CDD-41E3-8F2D-286613B4AE64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C236758-2CDD-41E3-8F2D-286613B4AE64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C236758-2CDD-41E3-8F2D-286613B4AE64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C236758-2CDD-41E3-8F2D-286613B4AE64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FE60908-7FE5-4153-9CAE-9194EFA78C79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FE60908-7FE5-4153-9CAE-9194EFA78C79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FE60908-7FE5-4153-9CAE-9194EFA78C79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FE60908-7FE5-4153-9CAE-9194EFA78C79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F1892E1-A78C-4C6A-9BB4-58AED526502A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F1892E1-A78C-4C6A-9BB4-58AED526502A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F1892E1-A78C-4C6A-9BB4-58AED526502A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F1892E1-A78C-4C6A-9BB4-58AED526502A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32705E4C-B6BA-4B8D-AAF0-675BED46C2DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32705E4C-B6BA-4B8D-AAF0-675BED46C2DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32705E4C-B6BA-4B8D-AAF0-675BED46C2DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32705E4C-B6BA-4B8D-AAF0-675BED46C2DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3700E760-348E-4E9D-9A14-2AC94B33F2AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3700E760-348E-4E9D-9A14-2AC94B33F2AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3700E760-348E-4E9D-9A14-2AC94B33F2AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3700E760-348E-4E9D-9A14-2AC94B33F2AE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3C236758-2CDD-41E3-8F2D-286613B4AE64} = {8698C254-E9D7-4249-B25D-4F7DC33657A6}
+		{0FE60908-7FE5-4153-9CAE-9194EFA78C79} = {8698C254-E9D7-4249-B25D-4F7DC33657A6}
+		{7F1892E1-A78C-4C6A-9BB4-58AED526502A} = {8698C254-E9D7-4249-B25D-4F7DC33657A6}
+		{32705E4C-B6BA-4B8D-AAF0-675BED46C2DE} = {8698C254-E9D7-4249-B25D-4F7DC33657A6}
+		{3700E760-348E-4E9D-9A14-2AC94B33F2AE} = {8698C254-E9D7-4249-B25D-4F7DC33657A6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {009A2C9F-810F-401F-BA52-6D416AEB8B29}
