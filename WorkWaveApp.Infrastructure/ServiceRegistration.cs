@@ -26,10 +26,9 @@ namespace WorkWaveApp.Infrastructure
 
 
 
-            services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql("User ID=postgres;Password=admin123;Host=localhost;Port=5432;Database=WorkWaveApp;"));
 
-            //services.AddDbContext<ApplicationDbContext>(options =>
-            //options.UseSqlServer("Data Source=DESKTOP-9RG21DM\\SQLEXPRESS;Initial Catalog=WorkWaveDb;Integrated Security=true;TrustServerCertificate=true"));
+            services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer("Data Source=.;Initial Catalog=WorkWaveDb;Integrated Security=true;TrustServerCertificate=true"));
 
         }
     }
