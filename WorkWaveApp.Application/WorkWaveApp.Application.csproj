@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WorkWaveApp.Domain\WorkWaveApp.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
