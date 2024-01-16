@@ -8,6 +8,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WorkWaveApp.Domain\WorkWaveApp.Domain.csproj" />
+    <ProjectReference Include="..\WorkWaveApp.Models\WorkWaveApp.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Behaviours\" />
+    <Folder Include="Interfaces\Admin\" />
   </ItemGroup>
 
 </Project>
