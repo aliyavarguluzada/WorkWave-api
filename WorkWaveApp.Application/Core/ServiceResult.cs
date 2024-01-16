@@ -17,7 +17,7 @@ namespace WorkWaveAPP.Application.Core
         public string Description { get; set; }
         public Dictionary<string, string> ErrorList { get; set; }
 
-        public ServiceResult<T> Ok(T response)
+        public static ServiceResult<T> Ok(T response)
         {
             return new ServiceResult<T>
             {
@@ -28,7 +28,7 @@ namespace WorkWaveAPP.Application.Core
             };
         }
 
-        public ServiceResult<T> Error(ErrorCodesEnum errorCode, Dictionary<string, string> errorList = null, int statusCode = (int)HttpStatusCode.BadRequest)
+        public static ServiceResult<T> Error(ErrorCodesEnum errorCode, Dictionary<string, string> errorList = null, int statusCode = (int)HttpStatusCode.BadRequest)
         {
             return new ServiceResult<T>
             {

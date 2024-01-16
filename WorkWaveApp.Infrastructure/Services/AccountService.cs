@@ -1,13 +1,16 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkWaveApp.Application.Interfaces;
 using WorkWaveApp.Infrastructure.Data;
+using WorkWaveApp.Infrastructure.Dtos.User;
 using WorkWaveApp.Models.v1.Account.Login;
 using WorkWaveApp.Models.v1.Account.Register;
 using WorkWaveAPP.Application.Core;
+using WorkWaveApp.Domain.Enums;
 
 namespace WorkWaveApp.Infrastructure.Services
 {
@@ -23,9 +26,36 @@ namespace WorkWaveApp.Infrastructure.Services
             throw new NotImplementedException();
         }
 
-        public Task<ServiceResult<RegisterResponse>> Register(RegisterRequest request)
+        public async Task<ServiceResult<RegisterResponse>> Register(RegisterRequest request)
         {
-            throw new NotImplementedException();
+            using var transaction = await _context.Database.BeginTransactionAsync();
+            try
+            {
+                var user = await _context
+                    .Users
+                    .Where(c => c.Email == request.Email)
+                    .AnyAsync();
+
+                if (user is true)
+                    return ServiceResult<RegisterResponse>.Error(ErrorCodesEnum.User_AlreadyExists);
+
+
+
+
+
+                var response = new RegisterResponse
+                {
+                    Email = request.Email,
+                    Name = request.Name,
+                };
+
+                return ServiceResult<RegisterResponse>.Ok(response);
+
+            }
+            catch (Exception)
+            {
+                return ServiceResult<RegisterResponse>.Error(Domain.Enums.ErrorCodesEnum.User_AlreadyExists);
+            }
         }
     }
 }

@@ -4,10 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WorkWaveApp.Domain.Enums
+namespace WorkWaveApp.Infrastructure.Dtos.User
 {
-    public enum ErrorCodesEnum
-    {
-        User_AlreadyExists = 400
-    }
+   public record UserDto(string UserEmail, string UserName);
 }
