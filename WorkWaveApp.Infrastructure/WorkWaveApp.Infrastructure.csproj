@@ -12,7 +12,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WorkWaveApp.Application\WorkWaveApp.Application.csproj" />
     <ProjectReference Include="..\WorkWaveApp.Domain\WorkWaveApp.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\Admin\" />
   </ItemGroup>
 
 </Project>
