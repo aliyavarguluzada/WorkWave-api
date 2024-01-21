@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using WorkWaveApp.Infrastructure;
+using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +26,13 @@ builder.Services.AddApiVersioning(options =>
     options.AssumeDefaultVersionWhenUnspecified = true;
     options.ApiVersionReader = new UrlSegmentApiVersionReader();
 });
+
+
+
+
+
+
+
 
 builder.Services.AddAuthentication(options =>
 {

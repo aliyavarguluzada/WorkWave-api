@@ -8,7 +8,7 @@ using WorkWaveApp.Models.v1.Account.Register;
 
 namespace WorkWaveApp.API.Controllers.v1
 {
-    [Route("api/v{version:apiVersion}/account")]
+    [Route("api/v{version:apiVersion}/home")]
     [ApiController]
     [ApiVersion("1.0")]
     public class HomeController : BaseController
