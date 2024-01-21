@@ -17,9 +17,11 @@ namespace WorkWaveApp.Infrastructure.Services
     public class AccountService : IAccountService
     {
         private readonly ApplicationDbContext _context;
-        public AccountService(ApplicationDbContext context)
+        private readonly IAuthService _authService;
+        public AccountService(ApplicationDbContext context, IAuthService authService)
         {
             _context = context;
+            _authService = authService;
         }
         public Task<ServiceResult<LoginResponse>> Login(LoginRequest request)
         {
