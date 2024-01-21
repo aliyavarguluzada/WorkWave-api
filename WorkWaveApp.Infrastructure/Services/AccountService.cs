@@ -34,6 +34,7 @@ namespace WorkWaveApp.Infrastructure.Services
                 var user = await _context
                     .Users
                     .Where(c => c.Email == request.Email)
+                    .AsNoTracking()
                     .AnyAsync();
 
                 if (user is true)
@@ -54,7 +55,7 @@ namespace WorkWaveApp.Infrastructure.Services
             }
             catch (Exception)
             {
-                return ServiceResult<RegisterResponse>.Error(Domain.Enums.ErrorCodesEnum.User_AlreadyExists);
+                return ServiceResult<RegisterResponse>.Error(ErrorCodesEnum.User_AlreadyExists);
             }
         }
     }

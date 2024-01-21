@@ -6,7 +6,7 @@ using WorkWaveApp.Domain.Entities;
 using WorkWaveApp.Infrastructure.Data;
 using WorkWaveApp.Models.v1.Account.Register;
 
-namespace WorkWaveApp.API.Controllers
+namespace WorkWaveApp.API.Controllers.v1
 {
     [Route("api/v{version:apiVersion}/account")]
     [ApiController]
@@ -42,6 +42,6 @@ namespace WorkWaveApp.API.Controllers
             }
         }
 
-        
+
     }
 }
