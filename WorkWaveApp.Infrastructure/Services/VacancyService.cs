@@ -10,6 +10,7 @@ using WorkWaveApp.Infrastructure.Data;
 using WorkWaveApp.Models.v1.Vacancy;
 using WorkWaveAPP.Application.Core;
 using WorkWaveApp.Domain.Enums;
+using WorkWaveApp.Domain.Entities;
 namespace WorkWaveApp.Infrastructure.Services
 {
     public class VacancyService : IVacancyService
@@ -29,15 +30,27 @@ namespace WorkWaveApp.Infrastructure.Services
                 if (String.IsNullOrEmpty(request.Name))
                     return ServiceResult<VacancyResponse>.Error(ErrorCodesEnum.Empty_Field_Error);
 
-                if(String.IsNullOrEmpty(request.Description))
-                    return ServiceResult<VacancyResponse>.Error(ErrorCodesEnum.Empty_Field_Error); 
-                
-                if(String.IsNullOrEmpty(request.Email))
+                if (String.IsNullOrEmpty(request.Description))
                     return ServiceResult<VacancyResponse>.Error(ErrorCodesEnum.Empty_Field_Error);
+
+                if (String.IsNullOrEmpty(request.Email))
+                    return ServiceResult<VacancyResponse>.Error(ErrorCodesEnum.Empty_Field_Error);
+
+                
+                var newVacancy = new Vacancy
+                {
+                    Name = request.Name,
+                    Description = request.Description,
+                    Email = request.Email,
+                    CityId = request.CityId,
+                    StatusId = request.StatusId,
+                    //CompanyId = request.CompanyId,
+                };
+
 
                 var response = new VacancyResponse
                 {
-                    
+
                 };
 
                 return ServiceResult<VacancyResponse>.Ok(response);
@@ -54,7 +67,7 @@ namespace WorkWaveApp.Infrastructure.Services
             throw new NotImplementedException();
         }
 
-        public Task<ServiceResult<VacancyResponse>> GetVacancy(int Id)
+        public Task<ServiceResult<VacancyResponse>> GetVacancyById(int Id)
         {
             throw new NotImplementedException();
         }
