@@ -19,6 +19,7 @@ namespace WorkWaveApp.Domain.Entities
         public int ExperienceId { get; set; }
         public int EducationId { get; set; }
         public string Email { get; set; }
+        public string Logo { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime ExpireDate { get; set; }
         public DateTime? Created { get; set; }

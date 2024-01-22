@@ -1,0 +1,23 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace WorkWaveApp.Models.v1.Vacancy
+{
+    public class VacancyRequest
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public int StatusId { get; set; }
+        public int CompanyId { get; set; }
+        public int JobTypeId { get; set; }
+        public int JobCategoryId { get; set; }
+        public int WorkFormId { get; set; }
+        public int CityId { get; set; }
+        public int ExperienceId { get; set; }
+        public int EducationId { get; set; }
+        public string Email { get; set; }
+    }
+}
