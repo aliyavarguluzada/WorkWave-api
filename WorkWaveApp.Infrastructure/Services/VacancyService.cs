@@ -9,7 +9,7 @@ using WorkWaveApp.Application.Interfaces;
 using WorkWaveApp.Infrastructure.Data;
 using WorkWaveApp.Models.v1.Vacancy;
 using WorkWaveAPP.Application.Core;
-
+using WorkWaveApp.Domain.Enums;
 namespace WorkWaveApp.Infrastructure.Services
 {
     public class VacancyService : IVacancyService
@@ -37,7 +37,7 @@ namespace WorkWaveApp.Infrastructure.Services
             catch (Exception)
             {
                 transaction.Rollback();
-                return ServiceResult<VacancyResponse>.Error(Domain.Enums.ErrorCodesEnum.Vacancy_Add_Fail);
+                return ServiceResult<VacancyResponse>.Error(ErrorCodesEnum.Vacancy_Add_Fail);
             }
         }
 

@@ -75,13 +75,13 @@ namespace WorkWaveApp.Infrastructure.Services
                     .AsNoTracking()
                     .AnyAsync();
 
-                if (request.Email == string.Empty)
+                if (String.IsNullOrEmpty(request.Email))
                     return ServiceResult<RegisterResponse>.Error(ErrorCodesEnum.Email_Is_Not_Correct);
 
-                if (request.Name == string.Empty)
+                if (String.IsNullOrEmpty(request.Name))
                     return ServiceResult<RegisterResponse>.Error(ErrorCodesEnum.Username_Is_Empty);
 
-                if (request.Password == string.Empty)
+                if (String.IsNullOrEmpty(request.Password))
                     return ServiceResult<RegisterResponse>.Error(ErrorCodesEnum.Password_Is_Not_Correct);
 
                 if (request.ConfirmPassword != request.Password)
