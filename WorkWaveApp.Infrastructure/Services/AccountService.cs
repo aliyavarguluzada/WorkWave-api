@@ -24,9 +24,44 @@ namespace WorkWaveApp.Infrastructure.Services
             _context = context;
             _authService = authService;
         }
-        public Task<ServiceResult<LoginResponse>> Login(LoginRequest request)
+        public async Task<ServiceResult<LoginResponse>> Login(LoginRequest request)
         {
-            throw new NotImplementedException();
+            try
+            {
+
+                var user = await _context
+                    .Users
+                    .Where(c => c.Email == request.Email)
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync();
+
+
+                if (user is null)
+                    return ServiceResult<LoginResponse>.Error(ErrorCodesEnum.User_Not_Found);
+
+                var passCheck = user.VerifyPassword(request.Password);
+
+                if (passCheck is false)
+                    return ServiceResult<LoginResponse>.Error(ErrorCodesEnum.Password_Is_Not_Correct);
+
+                var token = _authService.GenerateToken(user);
+
+                var response = new LoginResponse
+                {
+                    UserName = user.Name,
+                    Token = token
+                };
+
+                return ServiceResult<LoginResponse>.Ok(response);
+
+            }
+            catch (Exception)
+            {
+                return ServiceResult<LoginResponse>.Error(ErrorCodesEnum.Some_Error);
+            }
+
+
+
         }
 
         public async Task<ServiceResult<RegisterResponse>> Register(RegisterRequest request)

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using WorkWaveApp.Application.CQRS.Account.Command.Login;
 using WorkWaveApp.Application.CQRS.Account.Command.Register;
 using WorkWaveApp.Application.Interfaces;
 using WorkWaveApp.Infrastructure.Data;
@@ -21,6 +22,7 @@ namespace WorkWaveApp.Infrastructure
             services.AddTransient<IAuthService, AuthService>();
 
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(RegisterCommandHandler).Assembly));
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(LoginCommandHandler).Assembly));
 
 
 
