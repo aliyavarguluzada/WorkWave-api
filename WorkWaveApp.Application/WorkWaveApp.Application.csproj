@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <Folder Include="Behaviours\" />
-    <Folder Include="CQRS\Account\Command\Vacancy\" />
     <Folder Include="Interfaces\Admin\" />
   </ItemGroup>
 
