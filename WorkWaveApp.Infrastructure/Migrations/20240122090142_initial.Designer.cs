@@ -12,7 +12,7 @@ using WorkWaveApp.Infrastructure.Data;
 namespace WorkWaveApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240112140610_initial")]
+    [Migration("20240122090142_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -33,14 +33,14 @@ namespace WorkWaveApp.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedDate")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -56,7 +56,7 @@ namespace WorkWaveApp.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -75,7 +75,7 @@ namespace WorkWaveApp.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedDate")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -91,7 +91,7 @@ namespace WorkWaveApp.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -113,7 +113,7 @@ namespace WorkWaveApp.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedDate")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -131,14 +131,14 @@ namespace WorkWaveApp.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedDate")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -154,14 +154,14 @@ namespace WorkWaveApp.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedDate")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -177,14 +177,14 @@ namespace WorkWaveApp.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedDate")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -200,14 +200,14 @@ namespace WorkWaveApp.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedDate")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -226,7 +226,7 @@ namespace WorkWaveApp.Infrastructure.Migrations
                     b.Property<int>("CompanyId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Link")
@@ -237,7 +237,7 @@ namespace WorkWaveApp.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedDate")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -255,14 +255,14 @@ namespace WorkWaveApp.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedDate")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -278,7 +278,7 @@ namespace WorkWaveApp.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -296,7 +296,7 @@ namespace WorkWaveApp.Infrastructure.Migrations
                     b.Property<int?>("StatusId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedDate")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("UserRoleId")
@@ -319,14 +319,14 @@ namespace WorkWaveApp.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedDate")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -351,7 +351,7 @@ namespace WorkWaveApp.Infrastructure.Migrations
                     b.Property<DateTime?>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -390,7 +390,7 @@ namespace WorkWaveApp.Infrastructure.Migrations
                     b.Property<DateTime?>("Updated")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("UpdatedDate")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("WorkFormId")
@@ -425,14 +425,14 @@ namespace WorkWaveApp.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedDate")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
