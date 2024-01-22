@@ -19,7 +19,7 @@ namespace WorkWaveApp.Domain.Enums
         Password_Is_Not_Correct = 1_0_3,
 
         [Description("ConfirmPassword does not match")]
-        ConfirmPassword_Does_Not_Match = 1_0_4, 
+        ConfirmPassword_Does_Not_Match = 1_0_4,
 
         [Description("Username is Empty")]
         Username_Is_Empty = 1_0_5,
@@ -32,6 +32,13 @@ namespace WorkWaveApp.Domain.Enums
 
         [Description("Internal server error occured")]
         INTERNAL_SERVER_ERROR = 5_0_0,
+
+        [Description("Error occured while adding Vacancy")]
+        Vacancy_Add_Fail = 4_0_0,
+
+        [Description("Vacancy not found")]
+        Vacancy_Not_Found = 4_0_4,
+        
 
     }
 }
