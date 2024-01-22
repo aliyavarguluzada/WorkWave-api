@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WorkWaveApp.Application.CQRS.Account.Command.Login;
 using WorkWaveApp.Application.CQRS.Account.Command.Register;
+using WorkWaveApp.Models.v1.Account.Login;
 using WorkWaveApp.Models.v1.Account.Register;
 using WorkWaveAPP.Application.Core;
 
@@ -23,5 +25,9 @@ namespace WorkWaveApp.API.Controllers.v1
         [HttpPost("register")]
         public async Task<ServiceResult<RegisterResponse>> Register([FromBody] RegisterRequest request)
             => await _mediator.Send(new RegisterCommand(request));
+
+        [HttpPost("login")]
+        public async Task<ServiceResult<LoginResponse>> Login([FromBody] LoginRequest request)
+            => await _mediator.Send(new LoginCommand(request));
     }
 }
