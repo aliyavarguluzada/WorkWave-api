@@ -39,6 +39,9 @@ namespace WorkWaveApp.Domain.Enums
         [Description("Vacancy not found")]
         Vacancy_Not_Found = 4_0_4,
         
+        [Description("Do not leave field empty")]
+        Empty_Field_Error = 4_0_4,
+        
 
     }
 }

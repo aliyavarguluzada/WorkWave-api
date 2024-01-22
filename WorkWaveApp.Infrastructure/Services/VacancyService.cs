@@ -26,6 +26,14 @@ namespace WorkWaveApp.Infrastructure.Services
             using var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
+                if (String.IsNullOrEmpty(request.Name))
+                    return ServiceResult<VacancyResponse>.Error(ErrorCodesEnum.Empty_Field_Error);
+
+                if(String.IsNullOrEmpty(request.Description))
+                    return ServiceResult<VacancyResponse>.Error(ErrorCodesEnum.Empty_Field_Error); 
+                
+                if(String.IsNullOrEmpty(request.Email))
+                    return ServiceResult<VacancyResponse>.Error(ErrorCodesEnum.Empty_Field_Error);
 
                 var response = new VacancyResponse
                 {
