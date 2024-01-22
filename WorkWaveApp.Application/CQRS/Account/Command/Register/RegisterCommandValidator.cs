@@ -18,7 +18,7 @@ namespace WorkWaveApp.Application.CQRS.Account.Command.Register
 
             RuleFor(c => c.RegisterRequest.Email)
                 .NotEmpty().WithMessage("Email can not be empty")
-                .Matches(@"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$").WithMessage("Düzgün email daxil edin");
+                .Matches(@"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$").WithMessage("Enter a valid email");
 
             RuleFor(c=>c.RegisterRequest.Password)
                 .NotEmpty().WithMessage("Password can not be empty")
