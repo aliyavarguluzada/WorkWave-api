@@ -2,14 +2,10 @@ namespace WorkWaveApp.UnitTest
 {
     public class Tests
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         [Test]
-        public void Test1()
+        public void AccountServiceRegister_Email_Testing()
         {
+
             Assert.Pass();
         }
     }
