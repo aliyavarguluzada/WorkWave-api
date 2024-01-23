@@ -13,6 +13,7 @@ using WorkWaveApp.Domain.Enums;
 using WorkWaveApp.Domain.Entities;
 using FluentValidation.Validators;
 using Microsoft.Extensions.Configuration;
+using System.IO;
 namespace WorkWaveApp.Infrastructure.Services
 {
     public class VacancyService : IVacancyService
@@ -43,6 +44,7 @@ namespace WorkWaveApp.Infrastructure.Services
 
                 var newVacancy = new Vacancy
                 {
+
                     Name = request.Name,
                     Description = request.Description,
                     Email = request.Email,
@@ -55,9 +57,14 @@ namespace WorkWaveApp.Infrastructure.Services
                     StartDate = DateTime.Now,
                     ExpireDate = DateTime.Now.AddDays(19),
                     ExperienceId = request.ExperienceId,
-                    Logo = "dsa",
                     CompanyId = request.CompanyId,
                 };
+
+
+                if (!Directory.Exists(_configuration["LogoPath:Path"]))
+                {
+                    DirectoryInfo di = Directory.CreateDirectory(_configuration["LogoPath:Path"]);
+                }
 
 
                 if (request.Logo != null && request.Logo.Length > 0)
@@ -71,7 +78,8 @@ namespace WorkWaveApp.Infrastructure.Services
                     }
 
                     newVacancy.Logo = fileName;
-                    
+
+
                 }
 
 
