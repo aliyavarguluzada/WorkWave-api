@@ -36,7 +36,7 @@ namespace WorkWaveApp.Infrastructure.Services
                 if (String.IsNullOrEmpty(request.Email))
                     return ServiceResult<VacancyResponse>.Error(ErrorCodesEnum.Empty_Field_Error);
 
-                
+
                 var newVacancy = new Vacancy
                 {
                     Name = request.Name,
@@ -44,13 +44,26 @@ namespace WorkWaveApp.Infrastructure.Services
                     Email = request.Email,
                     CityId = request.CityId,
                     StatusId = request.StatusId,
-                    //CompanyId = request.CompanyId,
+                    EducationId = request.EducationId,
+                    JobCategoryId = request.JobCategoryId,
+                    JobTypeId = request.JobTypeId,
+                    WorkFormId = request.WorkFormId,
+                    StartDate = DateTime.Now,
+                    ExpireDate = DateTime.Now.AddDays(19),
+                    ExperienceId = request.ExperienceId,
+                    Logo = "dsa",
+                    CompanyId = request.CompanyId,
                 };
-
+                
+                await _context.Vacancies.AddAsync(newVacancy);
+                await transaction.CommitAsync();
+                await _context.SaveChangesAsync();
 
                 var response = new VacancyResponse
                 {
-
+                    Email = request.Email,
+                    Name = request.Name,
+                    VacancyId = newVacancy.Id
                 };
 
                 return ServiceResult<VacancyResponse>.Ok(response);
