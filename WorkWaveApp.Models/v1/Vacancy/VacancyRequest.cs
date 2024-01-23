@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,5 +20,6 @@ namespace WorkWaveApp.Models.v1.Vacancy
         public int ExperienceId { get; set; }
         public int EducationId { get; set; }
         public string Email { get; set; }
+        public IFormFile Logo { get; set; }
     }
 }

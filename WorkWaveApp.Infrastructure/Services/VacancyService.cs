@@ -11,15 +11,19 @@ using WorkWaveApp.Models.v1.Vacancy;
 using WorkWaveAPP.Application.Core;
 using WorkWaveApp.Domain.Enums;
 using WorkWaveApp.Domain.Entities;
+using FluentValidation.Validators;
+using Microsoft.Extensions.Configuration;
 namespace WorkWaveApp.Infrastructure.Services
 {
     public class VacancyService : IVacancyService
     {
         private readonly ApplicationDbContext _context;
+        private readonly IConfiguration _configuration;
 
-        public VacancyService(ApplicationDbContext context)
+        public VacancyService(ApplicationDbContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         public async Task<ServiceResult<VacancyResponse>> AddVacancy(VacancyRequest request)
@@ -54,7 +58,25 @@ namespace WorkWaveApp.Infrastructure.Services
                     Logo = "dsa",
                     CompanyId = request.CompanyId,
                 };
-                
+
+
+                if (request.Logo != null && request.Logo.Length > 0)
+                {
+                    var fileName = Guid.NewGuid() + Path.GetExtension(request.Logo.FileName);
+                    var filePath = Path.Combine(_configuration["LogoPath:Path"], fileName);
+
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await request.Logo.CopyToAsync(fileStream);
+                    }
+
+                    newVacancy.Logo = fileName;
+                    
+                }
+
+
+
+
                 await _context.Vacancies.AddAsync(newVacancy);
                 await transaction.CommitAsync();
                 await _context.SaveChangesAsync();
