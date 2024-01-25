@@ -15,10 +15,10 @@ namespace WorkWaveApp.UnitTest
         {
             var emailCase = new RegisterRequest
             {
-                Name = "AliyavarGuluzada",
+                Name = "",
                 Email = "",
                 Password = "a",
-                ConfirmPassword = "Scguluzadeh362!@#"
+                ConfirmPassword = ""
             };
 
             var result = validator.TestValidate(new RegisterCommand(emailCase));
@@ -31,10 +31,10 @@ namespace WorkWaveApp.UnitTest
         {
             var passwordCase = new RegisterRequest
             {
-                Name = "AliyavarGuluzada",
-                Email = "aliyavarguluzada@gmail.com",
+                Name = "",
+                Email = "",
                 Password = "a",
-                ConfirmPassword = "Scguluzadeh362!@#"
+                ConfirmPassword = ""
             };
 
             var result = validator.TestValidate(new RegisterCommand(passwordCase));
@@ -48,9 +48,9 @@ namespace WorkWaveApp.UnitTest
             var nameCase = new RegisterRequest
             {
                 Name = "",
-                Email = "aliyavarguluzada@gmail.com",
-                Password = "Scguluzadeh362!@#",
-                ConfirmPassword = "Scguluzadeh362!@#"
+                Email = "",
+                Password = "",
+                ConfirmPassword = ""
             };
 
             var result = validator.TestValidate(new RegisterCommand(nameCase));
