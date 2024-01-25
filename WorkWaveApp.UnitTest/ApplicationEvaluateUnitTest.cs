@@ -18,7 +18,7 @@ namespace WorkWaveApp.UnitTest
                 Name = "AliyavarGuluzada",
                 Email = "",
                 Password = "a",
-                ConfirmPassword = "Scguluzadeh362!@#"
+                ConfirmPassword = ""
             };
 
             var result = validator.TestValidate(new RegisterCommand(emailCase));
@@ -34,7 +34,7 @@ namespace WorkWaveApp.UnitTest
                 Name = "AliyavarGuluzada",
                 Email = "aliyavarguluzada@gmail.com",
                 Password = "a",
-                ConfirmPassword = "Scguluzadeh362!@#"
+                ConfirmPassword = ""
             };
 
             var result = validator.TestValidate(new RegisterCommand(passwordCase));
@@ -49,8 +49,8 @@ namespace WorkWaveApp.UnitTest
             {
                 Name = "",
                 Email = "aliyavarguluzada@gmail.com",
-                Password = "Scguluzadeh362!@#",
-                ConfirmPassword = "Scguluzadeh362!@#"
+                Password = "",
+                ConfirmPassword = ""
             };
 
             var result = validator.TestValidate(new RegisterCommand(nameCase));
