@@ -1,7 +1,6 @@
-using WorkWaveApp.Application.Interfaces;
-using WorkWaveApp.Domain.Entities;
-using WorkWaveApp.Infrastructure.Data;
-using WorkWaveApp.Infrastructure.Services;
+using FluentValidation.TestHelper;
+using WorkWaveApp.Application.CQRS.Account.Command.Register;
+using WorkWaveApp.Domain.Enums;
 using WorkWaveApp.Models.v1.Account.Register;
 
 namespace WorkWaveApp.UnitTest
@@ -9,41 +8,55 @@ namespace WorkWaveApp.UnitTest
     [TestFixture]
     public class Tests
     {
-        
-        private readonly ApplicationDbContext _context;
-        private readonly IAuthService _authService;
+        private readonly RegisterCommandValidator validator = new RegisterCommandValidator();
 
-        public Tests(ApplicationDbContext context) 
-        {
-            _context = context;
-        }
-
-        [SetUp]
-        public void Setup() 
-        {
-            var service = new AccountService(context: _context, authService: _authService);
-
-        }
         [Test]
-        public void AccountServiceRegister_Email_Testing()
+        public void RegisterCommandValidator_Testing_Email()
         {
-            // Arrange
-            var AccountService = new AccountService(context:_context, authService:_authService); // Replace with the actual class name
-            var validRequest = new RegisterRequest
+            var emailCase = new RegisterRequest
             {
-                Email = "test@example.com",
-                Name = "TestUser",
-                Password = "Password123",
-                ConfirmPassword = "Password123"
+                Name = "AliyavarGuluzada",
+                Email = "",
+                Password = "a",
+                ConfirmPassword = "Scguluzadeh362!@#"
             };
 
-            // Act
-            var result = AccountService.Register(validRequest);
+            var result = validator.TestValidate(new RegisterCommand(emailCase));
 
-            // Assert
-            Assert.That(result.IsCompletedSuccessfully, Is.True);
-            Assert.That(result.Result, Is.Not.Null);
-            Assert.Fail(result.Result.Response.Name);
+            result.ShouldHaveValidationErrorFor(c => c.RegisterRequest.Email);
         }
+
+        [Test]
+        public void RegisterCommandValidator_Testing_Password()
+        {
+            var passwordCase = new RegisterRequest
+            {
+                Name = "AliyavarGuluzada",
+                Email = "aliyavarguluzada@gmail.com",
+                Password = "a",
+                ConfirmPassword = "Scguluzadeh362!@#"
+            };
+
+            var result = validator.TestValidate(new RegisterCommand(passwordCase));
+
+            result.ShouldHaveValidationErrorFor(c => c.RegisterRequest.Password);
+        }
+
+        [Test]
+        public void RegisterCommandValidator_Testing_Name()
+        {
+            var nameCase = new RegisterRequest
+            {
+                Name = "",
+                Email = "aliyavarguluzada@gmail.com",
+                Password = "Scguluzadeh362!@#",
+                ConfirmPassword = "Scguluzadeh362!@#"
+            };
+
+            var result = validator.TestValidate(new RegisterCommand(nameCase));
+
+            result.ShouldHaveValidationErrorFor(c => c.RegisterRequest.Name).WithErrorMessage("Name can not be empty");
+        }
+
     }
 }
