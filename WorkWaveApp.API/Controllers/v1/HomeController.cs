@@ -35,7 +35,7 @@ namespace WorkWaveApp.API.Controllers.v1
                 await _context.SaveChangesAsync();
                 return userRole;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 transaction.Rollback();
                 return null;
