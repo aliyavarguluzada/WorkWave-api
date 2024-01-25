@@ -1,6 +1,5 @@
 using FluentValidation.TestHelper;
 using WorkWaveApp.Application.CQRS.Account.Command.Register;
-using WorkWaveApp.Domain.Enums;
 using WorkWaveApp.Models.v1.Account.Register;
 
 namespace WorkWaveApp.UnitTest
@@ -48,9 +47,9 @@ namespace WorkWaveApp.UnitTest
             var nameCase = new RegisterRequest
             {
                 Name = "",
-                Email = "aliyavarguluzada@gmail.com",
-                Password = "Scguluzadeh362!@#",
-                ConfirmPassword = "Scguluzadeh362!@#"
+                Email = "",
+                Password = "",
+                ConfirmPassword = ""
             };
 
             var result = validator.TestValidate(new RegisterCommand(nameCase));
