@@ -48,9 +48,9 @@ namespace WorkWaveApp.UnitTest
             var nameCase = new RegisterRequest
             {
                 Name = "",
-                Email = "",
-                Password = "a",
-                ConfirmPassword = ""
+                Email = "aliyavarguluzada@gmail.com",
+                Password = "Scguluzadeh362!@#",
+                ConfirmPassword = "Scguluzadeh362!@#"
             };
 
             var result = validator.TestValidate(new RegisterCommand(nameCase));
