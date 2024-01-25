@@ -49,7 +49,7 @@ namespace WorkWaveApp.UnitTest
             {
                 Name = "",
                 Email = "",
-                Password = "",
+                Password = "a",
                 ConfirmPassword = ""
             };
 
