@@ -65,7 +65,8 @@ Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
     .Enrich.FromLogContext()
     .WriteTo.Console()
-    .WriteTo.File("wwwroot/logs/appLog-.txt", rollingInterval:RollingInterval.Day)
+    .WriteTo.Debug(Serilog.Events.LogEventLevel.Information)
+    .WriteTo.File("wwwroot/logs/appLog-.txt", rollingInterval: RollingInterval.Day)
     .CreateBootstrapLogger();
 
 
