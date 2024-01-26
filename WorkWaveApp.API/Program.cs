@@ -33,9 +33,6 @@ builder.Services.AddApiVersioning(options =>
 
 
 
-
-
-
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -68,22 +65,26 @@ var configuration = new ConfigurationBuilder()
        .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json", true)
        .Build();
 
-var logger = new LoggerConfiguration()
-    .ReadFrom.Configuration(configuration)
-    .CreateLogger();
 
 try
 {
+    var logger = new LoggerConfiguration()
+        .ReadFrom.Configuration(configuration)
+        .CreateLogger();
+
+    builder.Logging.ClearProviders();
+
+    builder.Logging.AddSerilog(logger);
+    
     Log.Information("Starting Web Application");
+    
     builder.Host.UseSerilog((context, services, configuration) => configuration
         .ReadFrom.Configuration(context.Configuration)
-        .ReadFrom.Services(services)
-        .Enrich.FromLogContext()
-        .WriteTo.Console());
+        .ReadFrom.Services(services).WriteTo.File("Logs/log-.json", Serilog.Events.LogEventLevel.Verbose));// does not work when added from configuration not sure why
+
     var app = builder.Build();
 
     app.UseSerilogRequestLogging();
-
 
     // Configure the HTTP request pipeline.
     if (app.Environment.IsDevelopment())

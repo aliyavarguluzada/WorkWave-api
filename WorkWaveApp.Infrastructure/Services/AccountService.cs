@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Serilog;
 using WorkWaveApp.Application.Interfaces;
 using WorkWaveApp.Domain.Entities;
 using WorkWaveApp.Domain.Enums;
@@ -13,7 +15,9 @@ namespace WorkWaveApp.Infrastructure.Services
     {
         private readonly ApplicationDbContext _context;
         private readonly IAuthService _authService;
-        public AccountService(ApplicationDbContext context, IAuthService authService)
+
+        public AccountService(ApplicationDbContext context,
+                                 IAuthService authService)
         {
             _context = context;
             _authService = authService;
@@ -46,6 +50,8 @@ namespace WorkWaveApp.Infrastructure.Services
                     Token = token
                 };
 
+                Log.Information($"New Account Login: {response}");
+
                 return ServiceResult<LoginResponse>.Ok(response);
 
             }
@@ -61,6 +67,7 @@ namespace WorkWaveApp.Infrastructure.Services
         public async Task<ServiceResult<RegisterResponse>> Register(RegisterRequest request)
         {
             using var transaction = await _context.Database.BeginTransactionAsync();
+
             try
             {
                 var user = await _context
@@ -111,6 +118,7 @@ namespace WorkWaveApp.Infrastructure.Services
                     Name = request.Name,
                     UserId = newUser.Id
                 };
+                Log.Information($"New Account Registered: {response}");
 
                 return ServiceResult<RegisterResponse>.Ok(response);
 
