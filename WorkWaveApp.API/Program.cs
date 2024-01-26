@@ -7,6 +7,8 @@ using System.Text;
 using WorkWaveApp.Infrastructure;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog.Events;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -57,6 +59,13 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAuthorization();
 
 builder.Services.AddCors();
+
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .WriteTo.File("wwwroot/logs/appLog-.txt")
+    .CreateBootstrapLogger();
 
 var app = builder.Build();
 

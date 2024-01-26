@@ -1,17 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WorkWaveApp.Application.Interfaces;
+using WorkWaveApp.Domain.Entities;
+using WorkWaveApp.Domain.Enums;
 using WorkWaveApp.Infrastructure.Data;
-using WorkWaveApp.Infrastructure.Dtos.User;
 using WorkWaveApp.Models.v1.Account.Login;
 using WorkWaveApp.Models.v1.Account.Register;
 using WorkWaveAPP.Application.Core;
-using WorkWaveApp.Domain.Enums;
-using WorkWaveApp.Domain.Entities;
 
 namespace WorkWaveApp.Infrastructure.Services
 {
