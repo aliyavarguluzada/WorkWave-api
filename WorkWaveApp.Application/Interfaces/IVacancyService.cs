@@ -12,8 +12,8 @@ namespace WorkWaveApp.Application.Interfaces
     public interface IVacancyService
     {
         Task<ServiceResult<VacancyResponse>> AddVacancy(VacancyRequest request);
-        Task<ServiceResult<VacancyResponse>> GetVacancyById(int Id);
-        Task<ServiceResult<VacancyResponse>> SearchVacancy(string VacancyName);
+        Task<Vacancy> GetVacancyById(int Id);
+        Task<Vacancy> SearchVacancy(string VacancyName);
         Task<IEnumerable<Vacancy>> GetAllVacancies();
     }
 }

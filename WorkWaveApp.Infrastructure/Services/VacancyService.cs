@@ -1,22 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
-using System.Transactions;
+﻿using Microsoft.AspNetCore.OutputCaching;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using WorkWaveApp.Application.Interfaces;
+using WorkWaveApp.Domain.Entities;
+using WorkWaveApp.Domain.Enums;
 using WorkWaveApp.Infrastructure.Data;
 using WorkWaveApp.Models.v1.Vacancy;
 using WorkWaveAPP.Application.Core;
-using WorkWaveApp.Domain.Enums;
-using WorkWaveApp.Domain.Entities;
-using FluentValidation.Validators;
-using Microsoft.Extensions.Configuration;
-using System.IO;
-using WorkWaveApp.Infrastructure.Dtos.Vacancy;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.OutputCaching;
 namespace WorkWaveApp.Infrastructure.Services
 {
     public class VacancyService : IVacancyService
@@ -109,7 +99,7 @@ namespace WorkWaveApp.Infrastructure.Services
         }
 
         [OutputCache]
-        public async Task<IEnumerable<Domain.Entities.Vacancy>> GetAllVacancies()
+        public async Task<IEnumerable<Vacancy>> GetAllVacancies()
         {
             var allVacancies = await _context
                .Vacancies
@@ -129,12 +119,19 @@ namespace WorkWaveApp.Infrastructure.Services
             return allVacancies;
         }
 
-        public Task<ServiceResult<VacancyResponse>> GetVacancyById(int Id)
+        public async Task<Vacancy> GetVacancyById(int Id)
         {
-            throw new NotImplementedException();
+            var vacancy = await _context
+                .Vacancies
+                .AsNoTracking()
+                .Where(c => c.Id == Id)
+                .FirstOrDefaultAsync();
+
+            return vacancy;
         }
 
-        public Task<ServiceResult<VacancyResponse>> SearchVacancy(string VacancyName)
+
+        Task<Vacancy> IVacancyService.SearchVacancy(string VacancyName)
         {
             throw new NotImplementedException();
         }
