@@ -16,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using System.IO;
 using WorkWaveApp.Infrastructure.Dtos.Vacancy;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.OutputCaching;
 namespace WorkWaveApp.Infrastructure.Services
 {
     public class VacancyService : IVacancyService
@@ -107,6 +108,7 @@ namespace WorkWaveApp.Infrastructure.Services
             }
         }
 
+        [OutputCache]
         public async Task<IEnumerable<Domain.Entities.Vacancy>> GetAllVacancies()
         {
             var allVacancies = await _context
