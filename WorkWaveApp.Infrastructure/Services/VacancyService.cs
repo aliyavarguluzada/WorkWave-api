@@ -141,10 +141,11 @@ namespace WorkWaveApp.Infrastructure.Services
         {
             ArgumentNullException.ThrowIfNullOrEmpty(nameof(VacancyName));
 
+
             var vacancy = await _context
                 .Vacancies
                 .AsNoTracking()
-                .Where(c => c.Name == VacancyName)
+                .Where(c => c.Name.ToLower().Contains(VacancyName.ToLower()))
                 .FirstOrDefaultAsync();
 
             return vacancy;

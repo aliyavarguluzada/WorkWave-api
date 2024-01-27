@@ -13,7 +13,7 @@ namespace WorkWaveApp.Application.Interfaces
     {
         Task<ServiceResult<VacancyResponse>> AddVacancy(VacancyRequest request);
         Task<Vacancy> GetVacancyById(int Id);
-        Task<Domain.Entities.Vacancy> SearchVacancy(string VacancyName);
+        Task<Vacancy> SearchVacancy(string VacancyName);
         Task<IEnumerable<Vacancy>> GetAllVacancies();
     }
 }

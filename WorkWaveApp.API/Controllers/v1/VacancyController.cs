@@ -33,7 +33,10 @@ namespace WorkWaveApp.API.Controllers.v1
         public async Task<Vacancy> GetVacancyById([FromBody] int id)
             => await _mediator.Send(new GetVacancyByIdQuery(id));
 
-        
+        [HttpPost("searchVacancy")]
+        public async Task<Vacancy> SearchVacancy([FromBody] string vacancyName)
+            => await _mediator.Send(new SearchVacancyQuery(vacancyName));
+
 
     }
 }
