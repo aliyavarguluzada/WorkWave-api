@@ -119,8 +119,14 @@ namespace WorkWaveApp.Infrastructure.Services
             return allVacancies;
         }
 
+        [OutputCache]
         public async Task<Vacancy> GetVacancyById(int Id)
         {
+            ArgumentNullException.ThrowIfNullOrEmpty(nameof(Id));
+
+            if (Id == 0)
+                throw new ArgumentException("Argument must be bigger than 0, maybe argument is null check that");
+
             var vacancy = await _context
                 .Vacancies
                 .AsNoTracking()
@@ -131,9 +137,19 @@ namespace WorkWaveApp.Infrastructure.Services
         }
 
 
-        Task<Vacancy> IVacancyService.SearchVacancy(string VacancyName)
+        public async Task<Vacancy> SearchVacancy(string VacancyName)
         {
-            throw new NotImplementedException();
+            ArgumentNullException.ThrowIfNullOrEmpty(nameof(VacancyName));
+
+            var vacancy = await _context
+                .Vacancies
+                .AsNoTracking()
+                .Where(c => c.Name == VacancyName)
+                .FirstOrDefaultAsync();
+
+            return vacancy;
         }
+
+
     }
 }
