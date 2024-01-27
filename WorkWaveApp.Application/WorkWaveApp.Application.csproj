@@ -1,24 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\WorkWaveApp.Domain\WorkWaveApp.Domain.csproj" />
-    <ProjectReference Include="..\WorkWaveApp.Models\WorkWaveApp.Models.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\WorkWaveApp.Domain\WorkWaveApp.Domain.csproj" />
+		<ProjectReference Include="..\WorkWaveApp.Models\WorkWaveApp.Models.csproj" />
 
-  <ItemGroup>
-    <Folder Include="Behaviours\" />
-    <Folder Include="Interfaces\Admin\" />
-  </ItemGroup>
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="11.9.0" />
-    <PackageReference Include="MediatR" Version="12.2.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Behaviours\" />
+		<Folder Include="Interfaces\Admin\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="FluentValidation" Version="11.9.0" />
+		<PackageReference Include="MediatR" Version="12.2.0" />
+	</ItemGroup>
 
 </Project>

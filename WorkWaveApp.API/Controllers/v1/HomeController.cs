@@ -13,14 +13,7 @@ namespace WorkWaveApp.API.Controllers.v1
     [ApiVersion("1.0")]
     public class HomeController : BaseController
     {
-        private readonly ApplicationDbContext _context;
-        public HomeController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
-       
-        }
+        
 
 
     }

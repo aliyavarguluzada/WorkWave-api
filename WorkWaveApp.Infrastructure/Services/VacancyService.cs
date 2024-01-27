@@ -14,6 +14,8 @@ using WorkWaveApp.Domain.Entities;
 using FluentValidation.Validators;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using WorkWaveApp.Infrastructure.Dtos.Vacancy;
+using Microsoft.EntityFrameworkCore;
 namespace WorkWaveApp.Infrastructure.Services
 {
     public class VacancyService : IVacancyService
@@ -105,9 +107,25 @@ namespace WorkWaveApp.Infrastructure.Services
             }
         }
 
-        public Task<ServiceResult<VacancyResponse>> GetAllVacancies()
+        public async Task<ServiceResult<VacancyResponse>> GetAllVacancies()
         {
-            throw new NotImplementedException();
+            var allVacancies = await _context
+               .Vacancies
+               .AsNoTracking()
+               .Select(c => new GetAllVacancyDto
+               {
+                   VacancyId = c.Id,
+                   VacancyName = c.Name,
+                   ExpireDate = c.ExpireDate,
+                   StartDate = c.StartDate
+               }).ToListAsync();
+
+            var response = new VacancyResponse
+            {
+               
+            };
+
+            return ServiceResult<VacancyResponse>.Ok(response);
         }
 
         public Task<ServiceResult<VacancyResponse>> GetVacancyById(int Id)

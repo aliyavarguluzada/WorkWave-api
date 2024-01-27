@@ -22,6 +22,6 @@ namespace WorkWaveApp.API.Controllers.v1
         [HttpPost("addVacancy")]
         public async Task<ServiceResult<VacancyResponse>> AddVacancy([FromBody] VacancyRequest request)
             => await _mediator.Send(new AddVacancyCommand(request));
-
+        
     }
 }
