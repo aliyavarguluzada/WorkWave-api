@@ -19,27 +19,7 @@ namespace WorkWaveApp.API.Controllers.v1
             _context = context;
         }
 
-        [HttpPost("register")]
-        public async Task<UserRole> Register(UserRole role)
-        {
-            using var transaction = _context.Database.BeginTransaction();
-            try
-            {
-                UserRole userRole = new()
-                {
-                    Name = "admin"
-                };
-
-                await _context.UserRoles.AddAsync(userRole);
-                await transaction.CommitAsync();
-                await _context.SaveChangesAsync();
-                return userRole;
-            }
-            catch (Exception)
-            {
-                transaction.Rollback();
-                return null;
-            }
+       
         }
 
 
