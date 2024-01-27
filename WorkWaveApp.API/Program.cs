@@ -80,7 +80,7 @@ try
     
     builder.Host.UseSerilog((context, services, configuration) => configuration
         .ReadFrom.Configuration(context.Configuration)
-        .ReadFrom.Services(services).WriteTo.File("Logs/log-.json", Serilog.Events.LogEventLevel.Verbose));// does not work when added from configuration not sure why
+        .ReadFrom.Services(services).WriteTo.File("Logs/log-.json", Serilog.Events.LogEventLevel.Verbose, rollingInterval:RollingInterval.Day));// does not work when added from configuration not sure why
 
     var app = builder.Build();
 

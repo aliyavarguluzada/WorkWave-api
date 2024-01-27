@@ -107,25 +107,24 @@ namespace WorkWaveApp.Infrastructure.Services
             }
         }
 
-        public async Task<ServiceResult<VacancyResponse>> GetAllVacancies()
+        public async Task<IEnumerable<Domain.Entities.Vacancy>> GetAllVacancies()
         {
             var allVacancies = await _context
                .Vacancies
                .AsNoTracking()
-               .Select(c => new GetAllVacancyDto
-               {
-                   VacancyId = c.Id,
-                   VacancyName = c.Name,
-                   ExpireDate = c.ExpireDate,
-                   StartDate = c.StartDate
-               }).ToListAsync();
+               //.Select(c => new GetAllVacancyDto
+               //{
+               //    VacancyId = c.Id,
+               //    VacancyName = c.Name,
+               //    ExpireDate = c.ExpireDate,
+               //    StartDate = c.StartDate
+               //})
+               .OrderBy(c => c.Id)
+               .ToListAsync();
 
-            var response = new VacancyResponse
-            {
-               
-            };
 
-            return ServiceResult<VacancyResponse>.Ok(response);
+
+            return allVacancies;
         }
 
         public Task<ServiceResult<VacancyResponse>> GetVacancyById(int Id)

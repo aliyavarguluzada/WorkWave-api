@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WorkWaveApp.Application.CQRS.Account.Command.Vacancy;
+using WorkWaveApp.Application.CQRS.Account.Query.Vacancy;
 using WorkWaveApp.Models.v1.Vacancy;
 using WorkWaveAPP.Application.Core;
 
@@ -22,6 +23,10 @@ namespace WorkWaveApp.API.Controllers.v1
         [HttpPost("addVacancy")]
         public async Task<ServiceResult<VacancyResponse>> AddVacancy([FromBody] VacancyRequest request)
             => await _mediator.Send(new AddVacancyCommand(request));
-        
+
+        [HttpGet("getAllVacancies")]
+        public async Task<IEnumerable<Domain.Entities.Vacancy>> GetAllVacancies()
+            => await _mediator.Send(new GetAllVacanciesQuery());
+
     }
 }
