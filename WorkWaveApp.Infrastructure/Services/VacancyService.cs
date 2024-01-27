@@ -145,7 +145,7 @@ namespace WorkWaveApp.Infrastructure.Services
             var vacancy = await _context
                 .Vacancies
                 .AsNoTracking()
-                .Where(c => c.Name.ToLower().Contains(VacancyName.ToLower()))
+                .Where(c => c.Name.Replace("-", "").ToLower().Contains(VacancyName.Replace("-", "").ToLower()))
                 .FirstOrDefaultAsync();
 
             return vacancy;
