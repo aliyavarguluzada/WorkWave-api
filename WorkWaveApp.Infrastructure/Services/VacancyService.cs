@@ -136,7 +136,7 @@ namespace WorkWaveApp.Infrastructure.Services
             return vacancy;
         }
 
-
+        [OutputCache]
         public async Task<Vacancy> SearchVacancy(string VacancyName)
         {
             ArgumentNullException.ThrowIfNullOrEmpty(nameof(VacancyName));
