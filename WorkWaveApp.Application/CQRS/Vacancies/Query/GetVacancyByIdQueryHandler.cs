@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using WorkWaveApp.Application.Interfaces;
 using WorkWaveApp.Domain.Entities;
 
-namespace WorkWaveApp.Application.CQRS.Account.Query.Vacancy
+namespace WorkWaveApp.Application.CQRS.Vacancies.Query
 {
     public class GetVacancyByIdQueryHandler : IRequestHandler<GetVacancyByIdQuery, Domain.Entities.Vacancy>
     {

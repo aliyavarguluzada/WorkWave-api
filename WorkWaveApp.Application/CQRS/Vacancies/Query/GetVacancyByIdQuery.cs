@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WorkWaveApp.Domain.Entities;
 
-namespace WorkWaveApp.Application.CQRS.Account.Query.Vacancy
+namespace WorkWaveApp.Application.CQRS.Vacancies.Query
 {
     public class GetVacancyByIdQuery : IRequest<Domain.Entities.Vacancy>
     {

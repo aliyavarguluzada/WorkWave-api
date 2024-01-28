@@ -6,11 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using WorkWaveApp.Domain.Entities;
 
-namespace WorkWaveApp.Application.CQRS.Account.Query.Vacancy
+namespace WorkWaveApp.Application.CQRS.Vacancies.Query
 {
     public class SearchVacancyQuery : IRequest<Domain.Entities.Vacancy>
     {
-        public SearchVacancyQuery(string VacancyName) 
+        public SearchVacancyQuery(string VacancyName)
         {
             VacancyNames = VacancyName;
         }

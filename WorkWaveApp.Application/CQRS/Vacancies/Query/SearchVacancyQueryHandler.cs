@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WorkWaveApp.Application.Interfaces;
 
-namespace WorkWaveApp.Application.CQRS.Account.Query.Vacancy
+namespace WorkWaveApp.Application.CQRS.Vacancies.Query
 {
     public class SearchVacancyQueryHandler : IRequestHandler<SearchVacancyQuery, Domain.Entities.Vacancy>
     {

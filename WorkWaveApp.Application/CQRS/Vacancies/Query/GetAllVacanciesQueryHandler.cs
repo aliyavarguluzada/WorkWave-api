@@ -10,7 +10,7 @@ using WorkWaveApp.Models.v1.Vacancy;
 using WorkWaveAPP.Application.Core;
 using WorkWaveApp.Domain.Entities;
 
-namespace WorkWaveApp.Application.CQRS.Account.Query.Vacancy
+namespace WorkWaveApp.Application.CQRS.Vacancies.Query
 {
     public class GetAllVacanciesQueryHandler : IRequestHandler<GetAllVacanciesQuery, IEnumerable<Domain.Entities.Vacancy>>
     {

@@ -10,7 +10,7 @@ using WorkWaveApp.Infrastructure.Data;
 using WorkWaveApp.Infrastructure.Services;
 using System.Reflection;
 using WorkWaveApp.Application.CQRS.Account.Command.Vacancy;
-using WorkWaveApp.Application.CQRS.Account.Query.Vacancy;
+using WorkWaveApp.Application.CQRS.Vacancies.Query;
 
 namespace WorkWaveApp.Infrastructure
 {

@@ -44,7 +44,6 @@ namespace WorkWaveApp.Infrastructure.Services
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            //var jwtToken = tokenHandler.WriteToken(token);
             var stringToken = tokenHandler.WriteToken(token);
 
             return stringToken;
