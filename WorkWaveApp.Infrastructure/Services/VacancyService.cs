@@ -129,6 +129,7 @@ namespace WorkWaveApp.Infrastructure.Services
                 .AsNoTracking()
                 .Where(c => c.Id == Id)
                 .FirstOrDefaultAsync();
+
             var response = new GetVacancyByQueryResponse<Vacancy>
             {
                 Value = vacancy
@@ -138,7 +139,7 @@ namespace WorkWaveApp.Infrastructure.Services
         }
 
         [OutputCache]
-        public async Task<Vacancy> SearchVacancy(string VacancyName)
+        public async Task<ServiceResult<GetVacancyByQueryResponse<Vacancy>>> SearchVacancy(string VacancyName)
         {
             ArgumentNullException.ThrowIfNullOrEmpty(nameof(VacancyName));
 
@@ -149,7 +150,12 @@ namespace WorkWaveApp.Infrastructure.Services
                 .Where(c => c.Name.Replace("-", "").ToLower().Contains(VacancyName.Replace("-", "").ToLower()))
                 .FirstOrDefaultAsync();
 
-            return vacancy;
+            var response = new GetVacancyByQueryResponse<Vacancy>
+            {
+                Value = vacancy
+            };
+
+            return ServiceResult<GetVacancyByQueryResponse<Vacancy>>.Ok(response);
         }
 
 

@@ -5,10 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkWaveApp.Application.Interfaces;
+using WorkWaveAPP.Application.Core;
+using WorkWaveApp.Domain.Entities;
+using WorkWaveApp.Models.v1.Vacancy.Response;
 
 namespace WorkWaveApp.Application.CQRS.Vacancies.Query
 {
-    public class SearchVacancyQueryHandler : IRequestHandler<SearchVacancyQuery, Domain.Entities.Vacancy>
+    public class SearchVacancyQueryHandler : IRequestHandler<SearchVacancyQuery, ServiceResult<GetVacancyByQueryResponse<Vacancy>>>
     {
         private readonly IVacancyService _vacancyService;
 
@@ -17,11 +20,10 @@ namespace WorkWaveApp.Application.CQRS.Vacancies.Query
             _vacancyService = vacancyService;
         }
 
-        public async Task<Domain.Entities.Vacancy> Handle(SearchVacancyQuery request, CancellationToken cancellationToken)
-        {
-            var vacancy = await _vacancyService.SearchVacancy(request.VacancyNames);
+        public async Task<ServiceResult<GetVacancyByQueryResponse<Vacancy>>> Handle(SearchVacancyQuery request, CancellationToken cancellationToken)
+            => await _vacancyService.SearchVacancy(request.VacancyNames);
 
-            return vacancy;
-        }
+
+
     }
 }
