@@ -117,7 +117,7 @@ namespace WorkWaveApp.Infrastructure.Services
         }
 
         [OutputCache]
-        public async Task<Vacancy> GetVacancyById(int Id)
+        public async Task<ServiceResult<GetVacancyByQueryResponse<Vacancy>>> GetVacancyById(int Id)
         {
             ArgumentNullException.ThrowIfNullOrEmpty(nameof(Id));
 
@@ -129,8 +129,12 @@ namespace WorkWaveApp.Infrastructure.Services
                 .AsNoTracking()
                 .Where(c => c.Id == Id)
                 .FirstOrDefaultAsync();
+            var response = new GetVacancyByQueryResponse<Vacancy>
+            {
+                Value = vacancy
+            };
 
-            return vacancy;
+            return ServiceResult<GetVacancyByQueryResponse<Vacancy>>.Ok(response);
         }
 
         [OutputCache]
