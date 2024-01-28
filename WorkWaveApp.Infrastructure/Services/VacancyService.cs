@@ -123,7 +123,6 @@ namespace WorkWaveApp.Infrastructure.Services
             if (Id == 0)
                 return ServiceResult<GetVacancyByQueryResponse<Vacancy>>.Error(ErrorCodesEnum.Empty_Field_Error);
 
-                //throw new ArgumentException("Argument must be bigger than 0, maybe argument is null check that");
             var vacancy = await _context
                 .Vacancies
                 .AsNoTracking()
