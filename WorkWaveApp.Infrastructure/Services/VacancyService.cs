@@ -119,11 +119,11 @@ namespace WorkWaveApp.Infrastructure.Services
         [OutputCache]
         public async Task<ServiceResult<GetVacancyByQueryResponse<Vacancy>>> GetVacancyById(int Id)
         {
-            ArgumentNullException.ThrowIfNullOrEmpty(nameof(Id));
 
             if (Id == 0)
-                throw new ArgumentException("Argument must be bigger than 0, maybe argument is null check that");
+                return ServiceResult<GetVacancyByQueryResponse<Vacancy>>.Error(ErrorCodesEnum.Empty_Field_Error);
 
+                //throw new ArgumentException("Argument must be bigger than 0, maybe argument is null check that");
             var vacancy = await _context
                 .Vacancies
                 .AsNoTracking()
@@ -141,10 +141,9 @@ namespace WorkWaveApp.Infrastructure.Services
         [OutputCache]
         public async Task<ServiceResult<GetVacancyByQueryResponse<Vacancy>>> SearchVacancy(string VacancyName)
         {
-            ArgumentNullException.ThrowIfNullOrEmpty(nameof(VacancyName));
 
             if (VacancyName == "")
-                throw new ArgumentNullException("Enter a Vacancy Name");
+                return ServiceResult<GetVacancyByQueryResponse<Vacancy>>.Error(ErrorCodesEnum.Empty_Field_Error);
 
             var vacancy = await _context
                 .Vacancies
