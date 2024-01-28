@@ -143,6 +143,8 @@ namespace WorkWaveApp.Infrastructure.Services
         {
             ArgumentNullException.ThrowIfNullOrEmpty(nameof(VacancyName));
 
+            if (VacancyName == "")
+                throw new ArgumentNullException("Enter a Vacancy Name");
 
             var vacancy = await _context
                 .Vacancies
