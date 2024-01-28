@@ -8,7 +8,7 @@ using WorkWaveApp.Domain.Entities;
 
 namespace WorkWaveApp.Application.CQRS.Vacancies.Query
 {
-    public class GetVacancyByIdQuery : IRequest<Domain.Entities.Vacancy>
+    public class GetVacancyByIdQuery : IRequest<Vacancy>
     {
         public GetVacancyByIdQuery(int id)
         {

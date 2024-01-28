@@ -15,6 +15,7 @@ namespace WorkWaveAPP.Application.Core
         public int StatusCode { get; set; }
         public int ErrorCode { get; set; }
         public string Description { get; set; }
+        public List<T>? Values { get; set; } 
         public Dictionary<string, string> ErrorList { get; set; }
 
         public static ServiceResult<T> Ok(T response)
@@ -24,7 +25,8 @@ namespace WorkWaveAPP.Application.Core
                 Response = response,
                 StatusCode = (int)HttpStatusCode.OK,
                 Description = "Operation successfull",
-                ErrorList = null
+                ErrorList = null,
+                Values = new List<T> { response }
             };
         }
 

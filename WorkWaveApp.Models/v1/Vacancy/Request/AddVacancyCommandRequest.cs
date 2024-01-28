@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WorkWaveApp.Models.v1.Vacancy
+namespace WorkWaveApp.Models.v1.Vacancy.Request
 {
-    public class VacancyRequest
+    public class AddVacancyCommandRequest
     {
         public string Name { get; set; }
         public string Description { get; set; }

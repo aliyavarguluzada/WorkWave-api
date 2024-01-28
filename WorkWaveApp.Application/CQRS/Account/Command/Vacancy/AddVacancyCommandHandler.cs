@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkWaveApp.Application.Interfaces;
-using WorkWaveApp.Models.v1.Vacancy;
+using WorkWaveApp.Models.v1.Vacancy.Response;
 using WorkWaveAPP.Application.Core;
 
 namespace WorkWaveApp.Application.CQRS.Account.Command.Vacancy
 {
-    public class AddVacancyCommandHandler : IRequestHandler<AddVacancyCommand, ServiceResult<VacancyResponse>>
+    public class AddVacancyCommandHandler : IRequestHandler<AddVacancyCommand, ServiceResult<AddVacancyCommandResponse>>
     {
         private readonly IVacancyService _vacancyService;
 
@@ -21,7 +21,7 @@ namespace WorkWaveApp.Application.CQRS.Account.Command.Vacancy
 
 
 
-        Task<ServiceResult<VacancyResponse>> IRequestHandler<AddVacancyCommand, ServiceResult<VacancyResponse>>.Handle(AddVacancyCommand request, CancellationToken cancellationToken)
+        Task<ServiceResult<AddVacancyCommandResponse>> IRequestHandler<AddVacancyCommand, ServiceResult<AddVacancyCommandResponse>>.Handle(AddVacancyCommand request, CancellationToken cancellationToken)
                 => _vacancyService.AddVacancy(request.VacancyRequest);
 
 

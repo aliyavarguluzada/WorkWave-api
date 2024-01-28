@@ -1,10 +1,10 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WorkWaveApp.Application.CQRS.Account.Command.Vacancy;
-using WorkWaveApp.Application.CQRS.Account.Query.Vacancy;
+using WorkWaveApp.Application.CQRS.Vacancies.Query;
 using WorkWaveApp.Domain.Entities;
-using WorkWaveApp.Models.v1.Vacancy;
+using WorkWaveApp.Models.v1.Vacancy.Request;
+using WorkWaveApp.Models.v1.Vacancy.Response;
 using WorkWaveAPP.Application.Core;
 
 namespace WorkWaveApp.API.Controllers.v1
@@ -22,20 +22,20 @@ namespace WorkWaveApp.API.Controllers.v1
         }
 
         [HttpPost("addVacancy")]
-        public async Task<ServiceResult<VacancyResponse>> AddVacancy([FromBody] VacancyRequest request)
+        public async Task<ServiceResult<AddVacancyCommandResponse>> AddVacancy([FromBody] AddVacancyCommandRequest request)
             => await _mediator.Send(new AddVacancyCommand(request));
 
         [HttpGet("getAllVacancies")]
-        public async Task<IEnumerable<Vacancy>> GetAllVacancies()
+        public async Task<ServiceResult<GetAllVacanciesQueryResponse<Vacancy>>> GetAllVacancies()
             => await _mediator.Send(new GetAllVacanciesQuery());
 
-        [HttpPost("getVacancyById")]
-        public async Task<Vacancy> GetVacancyById([FromBody] int id)
-            => await _mediator.Send(new GetVacancyByIdQuery(id));
+        //[HttpPost("getVacancyById")]
+        //public async Task<Vacancy> GetVacancyById([FromBody] int id)
+        //    => await _mediator.Send(new GetVacancyByIdQuery(id));
 
-        [HttpPost("searchVacancy")]
-        public async Task<Vacancy> SearchVacancy([FromBody] string vacancyName)
-            => await _mediator.Send(new SearchVacancyQuery(vacancyName));
+        //[HttpPost("searchVacancy")]
+        //public async Task<Vacancy> SearchVacancy([FromBody] string vacancyName)
+        //    => await _mediator.Send(new SearchVacancyQuery(vacancyName));
 
 
     }

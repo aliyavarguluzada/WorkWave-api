@@ -4,16 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkWaveApp.Domain.Entities;
-using WorkWaveApp.Models.v1.Vacancy;
+using WorkWaveApp.Models.v1.Vacancy.Request;
+using WorkWaveApp.Models.v1.Vacancy.Response;
 using WorkWaveAPP.Application.Core;
 
 namespace WorkWaveApp.Application.Interfaces
 {
     public interface IVacancyService
     {
-        Task<ServiceResult<VacancyResponse>> AddVacancy(VacancyRequest request);
+        Task<ServiceResult<AddVacancyCommandResponse>> AddVacancy(AddVacancyCommandRequest request);
         Task<Vacancy> GetVacancyById(int Id);
         Task<Vacancy> SearchVacancy(string VacancyName);
-        Task<IEnumerable<Vacancy>> GetAllVacancies();
+        Task<ServiceResult<GetAllVacanciesQueryResponse<Vacancy>>> GetAllVacancies();
     }
 }

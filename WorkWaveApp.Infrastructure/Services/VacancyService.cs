@@ -5,7 +5,8 @@ using WorkWaveApp.Application.Interfaces;
 using WorkWaveApp.Domain.Entities;
 using WorkWaveApp.Domain.Enums;
 using WorkWaveApp.Infrastructure.Data;
-using WorkWaveApp.Models.v1.Vacancy;
+using WorkWaveApp.Models.v1.Vacancy.Request;
+using WorkWaveApp.Models.v1.Vacancy.Response;
 using WorkWaveAPP.Application.Core;
 namespace WorkWaveApp.Infrastructure.Services
 {
@@ -20,19 +21,19 @@ namespace WorkWaveApp.Infrastructure.Services
             _configuration = configuration;
         }
 
-        public async Task<ServiceResult<VacancyResponse>> AddVacancy(VacancyRequest request)
+        public async Task<ServiceResult<AddVacancyCommandResponse>> AddVacancy(AddVacancyCommandRequest request)
         {
             using var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
                 if (String.IsNullOrEmpty(request.Name))
-                    return ServiceResult<VacancyResponse>.Error(ErrorCodesEnum.Empty_Field_Error);
+                    return ServiceResult<AddVacancyCommandResponse>.Error(ErrorCodesEnum.Empty_Field_Error);
 
                 if (String.IsNullOrEmpty(request.Description))
-                    return ServiceResult<VacancyResponse>.Error(ErrorCodesEnum.Empty_Field_Error);
+                    return ServiceResult<AddVacancyCommandResponse>.Error(ErrorCodesEnum.Empty_Field_Error);
 
                 if (String.IsNullOrEmpty(request.Email))
-                    return ServiceResult<VacancyResponse>.Error(ErrorCodesEnum.Empty_Field_Error);
+                    return ServiceResult<AddVacancyCommandResponse>.Error(ErrorCodesEnum.Empty_Field_Error);
 
 
                 var newVacancy = new Vacancy
@@ -82,41 +83,37 @@ namespace WorkWaveApp.Infrastructure.Services
                 await transaction.CommitAsync();
                 await _context.SaveChangesAsync();
 
-                var response = new VacancyResponse
+                var response = new AddVacancyCommandResponse
                 {
                     Email = request.Email,
                     Name = request.Name,
                     VacancyId = newVacancy.Id
                 };
 
-                return ServiceResult<VacancyResponse>.Ok(response);
+                return ServiceResult<AddVacancyCommandResponse>.Ok(response);
             }
             catch (Exception)
             {
                 transaction.Rollback();
-                return ServiceResult<VacancyResponse>.Error(ErrorCodesEnum.Vacancy_Add_Fail);
+                return ServiceResult<AddVacancyCommandResponse>.Error(ErrorCodesEnum.Vacancy_Add_Fail);
             }
         }
 
         [OutputCache]
-        public async Task<IEnumerable<Vacancy>> GetAllVacancies()
+        public async Task<ServiceResult<GetAllVacanciesQueryResponse<Vacancy>>> GetAllVacancies()
         {
             var allVacancies = await _context
                .Vacancies
                .AsNoTracking()
-               //.Select(c => new GetAllVacancyDto
-               //{
-               //    VacancyId = c.Id,
-               //    VacancyName = c.Name,
-               //    ExpireDate = c.ExpireDate,
-               //    StartDate = c.StartDate
-               //})
                .OrderBy(c => c.Id)
                .ToListAsync();
 
+            var response = new GetAllVacanciesQueryResponse<Vacancy>
+            {
+                Values = allVacancies
+            };
 
-
-            return allVacancies;
+            return ServiceResult<GetAllVacanciesQueryResponse<Vacancy>>.Ok(response);
         }
 
         [OutputCache]
