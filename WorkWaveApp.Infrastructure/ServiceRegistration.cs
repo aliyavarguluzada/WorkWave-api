@@ -23,7 +23,7 @@ namespace WorkWaveApp.Infrastructure
             //configurationManager.AddJsonFile("appsettings.json");
 
 
-            IConfigurationBuilder builder = new ConfigurationBuilder().AddEnvironmentVariables().AddJsonFile("appsettings.json");
+            IConfigurationBuilder builder = new ConfigurationBuilder().AddJsonFile("appsettings.json");
             configuration = builder.Build();
 
 
