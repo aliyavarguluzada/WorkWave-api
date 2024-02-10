@@ -1,16 +1,13 @@
-﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 using WorkWaveApp.Application.CQRS.Account.Command.Login;
 using WorkWaveApp.Application.CQRS.Account.Command.Register;
+using WorkWaveApp.Application.CQRS.Account.Command.Vacancy;
+using WorkWaveApp.Application.CQRS.Vacancies.Query;
 using WorkWaveApp.Application.Interfaces;
 using WorkWaveApp.Infrastructure.Data;
 using WorkWaveApp.Infrastructure.Services;
-using System.Reflection;
-using WorkWaveApp.Application.CQRS.Account.Command.Vacancy;
-using WorkWaveApp.Application.CQRS.Vacancies.Query;
 
 namespace WorkWaveApp.Infrastructure
 {
@@ -19,6 +16,19 @@ namespace WorkWaveApp.Infrastructure
 
         public static void AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
+            // Code below and the one with IConfiguration both works for getting ConnectionString
+
+            //ConfigurationManager configurationManager = new();
+            //configurationManager.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../WorkWaveApp.API"));
+            //configurationManager.AddJsonFile("appsettings.json");
+
+
+            IConfigurationBuilder builder = new ConfigurationBuilder().AddEnvironmentVariables().AddJsonFile("appsettings.json");
+            configuration = builder.Build();
+
+
+
+
 
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IAuthService, AuthService>();
@@ -38,8 +48,11 @@ namespace WorkWaveApp.Infrastructure
 
 
 
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //options.UseSqlServer(configurationManager["Database:Connection"]));
+
             services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer("Data Source=.;Initial Catalog=WorkWaveDb;Integrated Security=true;TrustServerCertificate=true"));
+            options.UseSqlServer(configuration["Database:Connection"]));
 
         }
     }
