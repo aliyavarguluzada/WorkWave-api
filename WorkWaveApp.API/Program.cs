@@ -1,14 +1,10 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 using System.Text;
 using WorkWaveApp.Infrastructure;
-using System.Reflection;
-using Microsoft.Extensions.DependencyInjection;
-using Serilog.Events;
-using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 

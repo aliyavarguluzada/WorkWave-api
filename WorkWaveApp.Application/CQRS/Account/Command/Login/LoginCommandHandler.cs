@@ -17,7 +17,7 @@ namespace WorkWaveApp.Application.CQRS.Account.Command.Login
         {
             _accountService = accountService;
         }
-        public Task<ServiceResult<LoginResponse>> Handle(LoginCommand request, CancellationToken cancellationToken)
-             => _accountService.Login(request.LoginRequest);
+        public async Task<ServiceResult<LoginResponse>> Handle(LoginCommand request, CancellationToken cancellationToken)
+             => await _accountService.Login(request.LoginRequest);
     }
 }

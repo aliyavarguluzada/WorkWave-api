@@ -15,19 +15,13 @@ namespace WorkWaveApp.API.Controllers.v1
     public class AccountController : BaseController
     {
 
-        private readonly IMediator _mediator;
-
-        public AccountController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
 
         [HttpPost("register")]
         public async Task<ServiceResult<RegisterResponse>> Register([FromBody] RegisterRequest request)
-            => await _mediator.Send(new RegisterCommand(request));
+            => await Mediator.Send(new RegisterCommand(request));
 
         [HttpPost("login")]
         public async Task<ServiceResult<LoginResponse>> Login([FromBody] LoginRequest request)
-            => await _mediator.Send(new LoginCommand(request));
+            => await Mediator.Send(new LoginCommand(request));
     }
 }

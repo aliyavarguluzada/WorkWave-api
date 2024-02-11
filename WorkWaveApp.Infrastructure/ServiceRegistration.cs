@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using WorkWaveApp.Application.CQRS.Account.Command.Login;
 using WorkWaveApp.Application.CQRS.Account.Command.Register;
 using WorkWaveApp.Application.CQRS.Account.Command.Vacancy;
@@ -41,7 +43,7 @@ namespace WorkWaveApp.Infrastructure
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetVacancyByIdQueryHandler).Assembly));
             //services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
-
+            
 
 
 
@@ -56,4 +58,4 @@ namespace WorkWaveApp.Infrastructure
 
         }
     }
-}
+}   

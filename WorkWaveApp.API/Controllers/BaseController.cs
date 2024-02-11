@@ -8,6 +8,6 @@ namespace WorkWaveApp.API.Controllers
     public class BaseController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public IMediator Meadiator { get => _mediator ?? HttpContext.RequestServices.GetRequiredService<IMediator>(); }
+        public IMediator Mediator { get => _mediator ?? HttpContext.RequestServices.GetRequiredService<IMediator>(); }
     }
 }
