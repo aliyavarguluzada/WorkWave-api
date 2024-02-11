@@ -23,7 +23,7 @@ namespace WorkWaveApp.Infrastructure.Services
         {
             var issuer = _configuration["JWTSettings:Issuer"];
             var audience = _configuration["JWTSettings:Audience"];
-            var key = Encoding.ASCII.GetBytes(_configuration["JWTSettings:Key"]);
+            var key = Encoding.UTF8.GetBytes(_configuration["JWTSettings:Key"]);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -45,7 +45,7 @@ namespace WorkWaveApp.Infrastructure.Services
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var stringToken = tokenHandler.WriteToken(token);
-
+            
             return stringToken;
         }
 

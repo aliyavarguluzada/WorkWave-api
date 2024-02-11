@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace WorkWaveApp.Application.CQRS.Account.Command.Login
     public class LoginCommandHandler : IRequestHandler<LoginCommand, ServiceResult<LoginResponse>>
     {
         private readonly IAccountService _accountService;
+        private readonly IValidator<LoginCommand> _validator;
         public LoginCommandHandler(IAccountService accountService)
         {
             _accountService = accountService;

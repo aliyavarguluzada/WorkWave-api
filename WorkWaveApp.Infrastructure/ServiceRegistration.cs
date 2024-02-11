@@ -43,7 +43,8 @@ namespace WorkWaveApp.Infrastructure
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetVacancyByIdQueryHandler).Assembly));
             //services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
-            
+
+
 
 
 
