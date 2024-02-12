@@ -14,28 +14,22 @@ namespace WorkWaveApp.API.Controllers.v1
     [ApiVersion("1.0")]
     public class VacancyController : BaseController
     {
-        private readonly IMediator _mediator;
-
-        public VacancyController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
 
         [HttpPost("addVacancy")]
         public async Task<ServiceResult<AddVacancyCommandResponse>> AddVacancy([FromBody] AddVacancyCommandRequest request)
-            => await _mediator.Send(new AddVacancyCommand(request));
+            => await Mediator.Send(new AddVacancyCommand(request));
 
         [HttpGet("getAllVacancies")]
         public async Task<ServiceResult<GetAllVacanciesQueryResponse<Vacancy>>> GetAllVacancies()
-            => await _mediator.Send(new GetAllVacanciesQuery());
+            => await Mediator.Send(new GetAllVacanciesQuery());
 
         [HttpPost("getVacancyById")]
         public async Task<ServiceResult<GetVacancyByQueryResponse<Vacancy>>> GetVacancyById([FromBody] int id)
-            => await _mediator.Send(new GetVacancyByIdQuery(id));
+            => await Mediator.Send(new GetVacancyByIdQuery(id));
 
         [HttpPost("searchVacancy")]
         public async Task<ServiceResult<GetVacancyByQueryResponse<Vacancy>>> SearchVacancy([FromBody] string vacancyName)
-            => await _mediator.Send(new SearchVacancyQuery(vacancyName));
+            => await Mediator.Send(new SearchVacancyQuery(vacancyName));
 
 
     }
