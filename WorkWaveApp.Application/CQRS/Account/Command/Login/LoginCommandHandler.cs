@@ -1,10 +1,5 @@
 ﻿using FluentValidation;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WorkWaveApp.Application.Interfaces;
 using WorkWaveApp.Models.v1.Account.Login;
 using WorkWaveAPP.Application.Core;
@@ -15,11 +10,17 @@ namespace WorkWaveApp.Application.CQRS.Account.Command.Login
     {
         private readonly IAccountService _accountService;
         private readonly IValidator<LoginCommand> _validator;
-        public LoginCommandHandler(IAccountService accountService)
+        public LoginCommandHandler(IAccountService accountService
+            , IValidator<LoginCommand> validator
+            )
         {
             _accountService = accountService;
+            _validator = validator;
         }
         public async Task<ServiceResult<LoginResponse>> Handle(LoginCommand request, CancellationToken cancellationToken)
-             => await _accountService.Login(request.LoginRequest);
+        {
+            var validationResult = await _validator.ValidateAsync(request);
+            return await _accountService.Login(request.LoginRequest);
+        }
     }
 }

@@ -11,5 +11,6 @@ namespace WorkWaveApp.Models.v1.Account.Register
         public int UserId { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
+        
     }
 }

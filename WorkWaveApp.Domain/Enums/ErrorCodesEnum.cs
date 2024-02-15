@@ -41,7 +41,10 @@ namespace WorkWaveApp.Domain.Enums
         
         [Description("Do not leave field empty")]
         Empty_Field_Error = 4_0_4,
-        
+
+        [Description("FluentValidatonError")]
+        FluentValidatonError = 4_3_0
+
 
     }
 }

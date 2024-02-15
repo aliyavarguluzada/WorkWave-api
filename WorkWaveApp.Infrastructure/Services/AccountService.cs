@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+﻿using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 using WorkWaveApp.Application.Interfaces;
 using WorkWaveApp.Domain.Entities;
@@ -15,7 +15,6 @@ namespace WorkWaveApp.Infrastructure.Services
     {
         private readonly ApplicationDbContext _context;
         private readonly IAuthService _authService;
-
         public AccountService(ApplicationDbContext context,
                                  IAuthService authService)
         {
@@ -26,6 +25,7 @@ namespace WorkWaveApp.Infrastructure.Services
         {
             try
             {
+
 
                 var user = await _context
                     .Users
