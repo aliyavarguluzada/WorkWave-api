@@ -28,7 +28,7 @@ namespace WorkWaveApp.Application.CQRS.Account.Command.Register
            
             if (!validationResult.IsValid)
             {
-                return ServiceResult<RegisterResponse>.Error(ErrorCodesEnum.Email_Is_Not_Correct);
+                return ServiceResult<RegisterResponse>.Error(ErrorCodesEnum.FluentValidatonError);
             }
 
             return await _accountService.Register(request.RegisterRequest);
