@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
 using WorkWaveApp.Application.Interfaces;
+using WorkWaveApp.Domain.Enums;
 using WorkWaveApp.Models.v1.Account.Login;
 using WorkWaveAPP.Application.Core;
 
@@ -20,6 +21,10 @@ namespace WorkWaveApp.Application.CQRS.Account.Command.Login
         public async Task<ServiceResult<LoginResponse>> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
             var validationResult = await _validator.ValidateAsync(request);
+            if (!validationResult.IsValid) 
+            {
+                return ServiceResult<LoginResponse>.Error(ErrorCodesEnum.FluentValidatonError);
+            }
             return await _accountService.Login(request.LoginRequest);
         }
     }
