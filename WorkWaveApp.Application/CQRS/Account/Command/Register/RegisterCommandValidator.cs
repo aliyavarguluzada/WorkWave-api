@@ -13,11 +13,13 @@ namespace WorkWaveApp.Application.CQRS.Account.Command.Register
 
             RuleFor(c => c.RegisterRequest.Email)
                 .NotEmpty().WithMessage("Email can not be empty")
-                .Matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^\\da-zA-Z]).{8,}$\r\n").WithMessage("Enter a valid email");
+                //.Matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^\\da-zA-Z]).{8,}$\r\n")
+                .WithMessage("Enter a valid email");
 
             RuleFor(c => c.RegisterRequest.Password)
                 .NotEmpty().WithMessage("Password can not be empty")
-                .Matches(@"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$").WithMessage("Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one digit, and one special character.");
+                //.Matches(@"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$")
+                .WithMessage("Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one digit, and one special character.");
 
             RuleFor(c => c.RegisterRequest.ConfirmPassword)
                 .NotEmpty().WithMessage("ConfirmPassword can not be empty")
