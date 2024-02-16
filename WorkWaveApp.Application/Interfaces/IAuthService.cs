@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WorkWaveApp.Application.Core;
 using WorkWaveApp.Domain.Entities;
 
 namespace WorkWaveApp.Application.Interfaces
 {
     public interface IAuthService
     {
-        public string GenerateToken(User user);
+        public AuthResult GenerateToken(User user);
         public string ValidateToken(string token);
+        public string RefreshToken(int length);
     }
 }

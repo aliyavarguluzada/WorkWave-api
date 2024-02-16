@@ -5,8 +5,10 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using WorkWaveApp.Application.Core;
 using WorkWaveApp.Application.Interfaces;
 using WorkWaveApp.Domain.Entities;
 
@@ -19,7 +21,7 @@ namespace WorkWaveApp.Infrastructure.Services
         {
             _configuration = configuration;
         }
-        public string GenerateToken(User user)
+        public AuthResult GenerateToken(User user)
         {
             var issuer = _configuration["JWTSettings:Issuer"];
             var audience = _configuration["JWTSettings:Audience"];
@@ -33,7 +35,7 @@ namespace WorkWaveApp.Infrastructure.Services
                 new Claim("Email", user.Email),
                 new Claim("jti",  Guid.NewGuid().ToString().Replace("-","")),
              }),
-                Expires = DateTime.UtcNow.AddHours(Convert.ToInt32(_configuration["JWTSettings:Expiration"])),
+                Expires = DateTime.UtcNow.AddMinutes(Convert.ToInt32(_configuration["JWTSettings:Expiration"])),
                 Issuer = issuer,
                 Audience = audience,
                 SigningCredentials = new SigningCredentials
@@ -41,13 +43,32 @@ namespace WorkWaveApp.Infrastructure.Services
                 (new SymmetricSecurityKey(key),
                 SecurityAlgorithms.HmacSha512Signature)
             };
-
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
+
             var stringToken = tokenHandler.WriteToken(token);
-            
-            return stringToken;
+
+            var refreshToken = new RefreshToken()
+            {
+                JwtId = token.Id,
+                IsUsed = false,
+                UserId = user.Id,
+                AddedDate = DateTime.UtcNow,
+                ExpiryDate = DateTime.UtcNow.AddYears(1),
+                IsRevoked = false,
+                Token = RefreshToken(25) + Guid.NewGuid()
+            };
+
+
+            var result = new AuthResult
+            {
+                Token = stringToken,
+                Success = true,
+                RefreshToken = refreshToken.Token
+            };
+            return result;
         }
+
 
         public string ValidateToken(string token)
         {
@@ -67,6 +88,19 @@ namespace WorkWaveApp.Infrastructure.Services
             var jti = jwtToken.Claims.First(x => x.Type == "jti").Value;
 
             return token;
+        }
+
+        public string RefreshToken(int length)
+        {
+            //var randomNumber = new byte[32];
+            //using var rng = RandomNumberGenerator.Create();
+            //rng.GetBytes(randomNumber);
+            //return Convert.ToBase64String(randomNumber);
+
+            var random = new Random();
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+            .Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }

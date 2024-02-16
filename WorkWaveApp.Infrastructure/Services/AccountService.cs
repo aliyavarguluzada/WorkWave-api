@@ -25,8 +25,6 @@ namespace WorkWaveApp.Infrastructure.Services
         {
             try
             {
-
-
                 var user = await _context
                     .Users
                     .Where(c => c.Email == request.Email)
@@ -47,7 +45,7 @@ namespace WorkWaveApp.Infrastructure.Services
                 var response = new LoginResponse
                 {
                     UserName = user.Name,
-                    Token = token
+                    Token = token.Token
                 };
 
                 Log.Information($"New Account Login: {response}");

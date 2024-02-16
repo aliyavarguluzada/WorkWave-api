@@ -25,6 +25,8 @@ namespace WorkWaveApp.Application.CQRS.Account.Command.Register
         public async Task<ServiceResult<RegisterResponse>> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
             var validationResult = await _validator.ValidateAsync(request);
+
+            bool validation = validationResult.IsValid;
            
             if (!validationResult.IsValid)
             {

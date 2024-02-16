@@ -22,10 +22,9 @@ namespace WorkWaveApp.Application.CQRS.Vacancies.Query
         }
 
         public async Task<ServiceResult<GetAllVacanciesQueryResponse<Vacancy>>> Handle(GetAllVacanciesQuery request, CancellationToken cancellationToken)
-        
-             =>  await _vacancyService.GetAllVacancies();
+             => await _vacancyService.GetAllVacancies();
 
-        
+
 
 
     }

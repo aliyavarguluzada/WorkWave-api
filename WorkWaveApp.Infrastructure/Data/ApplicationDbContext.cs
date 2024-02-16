@@ -26,19 +26,14 @@ namespace WorkWaveApp.Infrastructure.Data
             modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
             modelBuilder.ApplyConfiguration(new VacancyConfiguration());
             modelBuilder.ApplyConfiguration(new WorkFormConfiguration());
+            modelBuilder.ApplyConfiguration(new RefreshTokenConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
 
 
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    //string connection = "User ID=postgres;Password=admin123;Host=localhost;Port=5432;Database=WorkWaveApp;";
-        //    string connection = "Data Source=DESKTOP-9RG21DM\\SQLEXPRESS;Initial Catalog=WorkWaveDb;Integrated Security=true;TrustServerCertificate=true";
-        //    optionsBuilder.UseNpgsql(connection);
-        //    base.OnConfiguring(optionsBuilder);
-        //}
+        public virtual DbSet<RefreshToken> RefreshTokens { get; set; }
 
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
