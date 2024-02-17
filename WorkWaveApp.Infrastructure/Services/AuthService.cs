@@ -27,21 +27,28 @@ namespace WorkWaveApp.Infrastructure.Services
             var audience = _configuration["JWTSettings:Audience"];
             var key = Encoding.UTF8.GetBytes(_configuration["JWTSettings:Key"]);
 
+            //var claims = new List<Claim>
+            //{
+            //    new Claim(ClaimTypes.Name, user.Email),
+            //    new Claim(ClaimTypes.Role.ToString(), user.UserRole.Name)
+            //};
+
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                new Claim("id", user.Id.ToString()),
-                new Claim("Email", user.Email),
-                new Claim("jti",  Guid.NewGuid().ToString().Replace("-","")),
-             }),
+                    new Claim("id", user.Id.ToString()),
+                    new Claim("Email", user.Email),
+                    new Claim("jti", Guid.NewGuid().ToString().Replace("-", "")),
+                    new Claim(ClaimsIdentity.DefaultRoleClaimType, "Company")
+                }),
                 Expires = DateTime.UtcNow.AddMinutes(Convert.ToInt32(_configuration["JWTSettings:Expiration"])),
                 Issuer = issuer,
                 Audience = audience,
                 SigningCredentials = new SigningCredentials
-
                 (new SymmetricSecurityKey(key),
-                SecurityAlgorithms.HmacSha512Signature)
+                SecurityAlgorithms.HmacSha512Signature),
+                //Claims = (IDictionary<string, object>)claims
             };
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);

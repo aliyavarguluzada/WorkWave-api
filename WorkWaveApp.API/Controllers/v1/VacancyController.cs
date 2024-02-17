@@ -1,4 +1,4 @@
-﻿using MediatR;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WorkWaveApp.Application.CQRS.Account.Command.Vacancy;
 using WorkWaveApp.Application.CQRS.Vacancies.Query;
@@ -9,6 +9,7 @@ using WorkWaveAPP.Application.Core;
 
 namespace WorkWaveApp.API.Controllers.v1
 {
+    [Authorize("Company")]
     [Route("api/v{version:apiversion}/vacancy")]
     [ApiController]
     [ApiVersion("1.0")]

@@ -38,12 +38,15 @@ namespace WorkWaveApp.Domain.Enums
 
         [Description("Vacancy not found")]
         Vacancy_Not_Found = 4_0_4,
-        
+
         [Description("Do not leave field empty")]
         Empty_Field_Error = 4_0_4,
 
         [Description("FluentValidatonError")]
-        FluentValidatonError = 4_3_0
+        FluentValidatonError = 4_3_0,
+
+        [Description("You are not authorized")]
+        Authorization_Error = 4_0_1
 
 
     }
