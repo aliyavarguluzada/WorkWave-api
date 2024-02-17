@@ -27,9 +27,19 @@ namespace WorkWaveApp.Application.CQRS.Account.Command.Register
             var validationResult = await _validator.ValidateAsync(request);
 
             bool validation = validationResult.IsValid;
-           
+
             if (!validationResult.IsValid)
             {
+                var errors = validationResult.Errors
+                      .GroupBy(x => x.PropertyName)
+                      .ToDictionary(
+                      g => g.Key,
+                      g => g.Select(x => x.ErrorMessage).ToArray());
+                foreach(var item in errors)
+                {
+                    Console.WriteLine(item);
+                }
+
                 return ServiceResult<RegisterResponse>.Error(ErrorCodesEnum.FluentValidatonError);
             }
 
