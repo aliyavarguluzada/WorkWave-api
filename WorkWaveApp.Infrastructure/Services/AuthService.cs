@@ -40,7 +40,7 @@ namespace WorkWaveApp.Infrastructure.Services
                     new Claim("id", user.Id.ToString()),
                     new Claim("Email", user.Email),
                     new Claim("jti", Guid.NewGuid().ToString().Replace("-", "")),
-                    new Claim(ClaimsIdentity.DefaultRoleClaimType, "Company")
+                    new Claim(ClaimsIdentity.DefaultRoleClaimType, user.UserRole.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(Convert.ToInt32(_configuration["JWTSettings:Expiration"])),
                 Issuer = issuer,
