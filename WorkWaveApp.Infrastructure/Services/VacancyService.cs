@@ -105,8 +105,12 @@ namespace WorkWaveApp.Infrastructure.Services
         {
             var allVacancies = await _context
                .Vacancies
+               .OrderByDescending(c => c.Id)
+               .Include(c => c.Company)
+               .Include(c => c.City)
+               .Include(c => c.JobType)
+               .Include(c => c.JobCategory)
                .AsNoTracking()
-               .OrderBy(c => c.Id)
                .ToListAsync();
 
             var response = new GetAllVacanciesQueryResponse<Vacancy>
