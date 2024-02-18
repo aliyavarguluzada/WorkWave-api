@@ -16,7 +16,7 @@ namespace WorkWaveApp.API.Controllers.v1
     {
 
         [HttpPost("addVacancy"), Authorize(Roles = "company")]
-        public async Task<ServiceResult<AddVacancyCommandResponse>> AddVacancy([FromBody] AddVacancyCommandRequest request)
+        public async Task<ServiceResult<AddVacancyCommandResponse>> AddVacancy([FromForm] AddVacancyCommandRequest request)
             => await Mediator.Send(new AddVacancyCommand(request));
 
         [HttpGet("getAllVacancies")]

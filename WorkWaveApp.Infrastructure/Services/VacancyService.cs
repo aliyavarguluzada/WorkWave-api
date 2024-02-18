@@ -110,6 +110,8 @@ namespace WorkWaveApp.Infrastructure.Services
                .Include(c => c.City)
                .Include(c => c.JobType)
                .Include(c => c.JobCategory)
+               .Include(c => c.WorkForm)
+               .Include(c => c.Education)
                .AsNoTracking()
                .ToListAsync();
 
@@ -130,9 +132,21 @@ namespace WorkWaveApp.Infrastructure.Services
 
             var vacancy = await _context
                 .Vacancies
+                .Include(c => c.Company)
+                .Include(c => c.City)
+                .Include(c => c.JobType)
+                .Include(c => c.JobCategory)
+                .Include(c => c.WorkForm)
+                .Include(c => c.Education)
+                .Include(c => c.CreatedDate)
+                .Include(c => c.UpdatedDate)
                 .AsNoTracking()
                 .Where(c => c.Id == Id)
                 .FirstOrDefaultAsync();
+
+            if(vacancy is null)
+                return ServiceResult<GetVacancyByQueryResponse<Vacancy>>.Error(ErrorCodesEnum.Null_Error);
+
 
             var response = new GetVacancyByQueryResponse<Vacancy>
             {

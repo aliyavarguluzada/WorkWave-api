@@ -46,7 +46,9 @@ namespace WorkWaveApp.Domain.Enums
         FluentValidatonError = 4_3_0,
 
         [Description("You are not authorized")]
-        Authorization_Error = 4_0_1
+        Authorization_Error = 4_0_1,
+        [Description("Null Error")]
+        Null_Error = 4_0_5
 
 
     }

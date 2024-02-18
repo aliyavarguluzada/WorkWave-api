@@ -82,13 +82,13 @@ builder.Services.AddAuthorization(options =>
         .RequireAuthenticatedUser()
         .Build());
 
-    options.AddPolicy("Company", new AuthorizationPolicyBuilder()
-        .RequireRole("Company")
+    options.AddPolicy("company", new AuthorizationPolicyBuilder()
+        .RequireRole("company")
         .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
         .RequireAuthenticatedUser()
         .Build());
-    options.AddPolicy("Admin", new AuthorizationPolicyBuilder()
-        .RequireRole("Admin")
+    options.AddPolicy("admin", new AuthorizationPolicyBuilder()
+        .RequireRole("admin")
         .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
         .RequireAuthenticatedUser()
         .Build());
