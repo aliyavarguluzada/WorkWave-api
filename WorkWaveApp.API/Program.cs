@@ -9,12 +9,12 @@ using Swashbuckle.AspNetCore.Filters;
 using System.Text;
 using System.Text.Json.Serialization;
 using WorkWaveApp.Infrastructure;
+using WorkWaveApp.Infrastructure.Services.Hubs;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 
-// Add services to the container.
 
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
@@ -22,8 +22,11 @@ builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
             policy.WithOrigins().AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddSignalR();
+
 builder.Services.AddSwaggerGen(options =>
 {
 
@@ -75,6 +78,7 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuerSigningKey = true
     };
 });
+
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("Default", new AuthorizationPolicyBuilder()
@@ -130,7 +134,12 @@ try
 
     app.UseSerilogRequestLogging();
 
-    // Configure the HTTP request pipeline.
+    app.UseEndpoints(routes =>
+    {
+        routes.MapHub<ChatHub>("/chatHub");
+    });
+
+
     if (app.Environment.IsDevelopment())
     {
         app.UseSwagger();
