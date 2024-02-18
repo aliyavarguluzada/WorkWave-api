@@ -9,14 +9,13 @@ using WorkWaveAPP.Application.Core;
 
 namespace WorkWaveApp.API.Controllers.v1
 {
-    [Authorize("Company")]
     [Route("api/v{version:apiversion}/vacancy")]
     [ApiController]
     [ApiVersion("1.0")]
     public class VacancyController : BaseController
     {
 
-        [HttpPost("addVacancy")]
+        [HttpPost("addVacancy"), Authorize(Roles = "company")]
         public async Task<ServiceResult<AddVacancyCommandResponse>> AddVacancy([FromBody] AddVacancyCommandRequest request)
             => await Mediator.Send(new AddVacancyCommand(request));
 
