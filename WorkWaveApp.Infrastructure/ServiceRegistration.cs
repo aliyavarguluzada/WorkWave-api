@@ -35,13 +35,6 @@ namespace WorkWaveApp.Infrastructure
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IVacancyService, VacancyService>();
 
-
-            //services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-
-            //services.AddScoped<IValidator<LoginRequest>, LoginCommandValidator>();
-
-
-
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(RegisterCommandHandler).Assembly));
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(LoginCommandHandler).Assembly));
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AddVacancyCommandHandler).Assembly));
@@ -49,6 +42,7 @@ namespace WorkWaveApp.Infrastructure
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetVacancyByIdQueryHandler).Assembly));
 
             services.AddValidatorsFromAssemblyContaining<LoginCommandValidator>();
+            services.AddValidatorsFromAssemblyContaining<RegisterCommandValidator>();
 
 
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(LoginCommandValidator).Assembly));
@@ -64,4 +58,4 @@ namespace WorkWaveApp.Infrastructure
 
         }
     }
-}   
+}

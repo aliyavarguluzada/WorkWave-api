@@ -27,7 +27,7 @@ namespace WorkWaveApp.Infrastructure.Services
             {
                 var user = await _context
                     .Users
-                    .Include(c => c.UserRole)
+                    .Include(c => c.UserRole) // retrieving UserRole is essential for authorization
                     .Where(c => c.Email == request.Email)
                     .AsNoTracking()
                     .FirstOrDefaultAsync();
