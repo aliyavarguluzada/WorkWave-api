@@ -94,6 +94,7 @@ builder.Services.AddAuthorization(options =>
         .Build());
 });
 
+// code is for ignoring cycles otherwise an exception occurs
 builder.Services.AddControllers().AddJsonOptions(options =>
                 options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
