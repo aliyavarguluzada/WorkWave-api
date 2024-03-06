@@ -29,8 +29,6 @@ namespace WorkWaveApp.Infrastructure
 
 
 
-
-
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IVacancyService, VacancyService>();

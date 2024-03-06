@@ -12,8 +12,8 @@ using WorkWaveApp.Infrastructure.Data;
 namespace WorkWaveApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240216134114_ref")]
-    partial class @ref
+    [Migration("20240229183948_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
