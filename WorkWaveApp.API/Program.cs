@@ -25,6 +25,8 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 
+
+
 builder.Services.AddSignalR();
 
 builder.Services.AddSwaggerGen(options =>
@@ -146,7 +148,7 @@ try
         app.UseSwaggerUI();
     }
     app.UseHttpsRedirection();
-
+    app.UseAuthentication();
     app.UseAuthorization();
 
     app.MapControllers();
