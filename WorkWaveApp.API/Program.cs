@@ -136,6 +136,8 @@ try
 
     app.UseSerilogRequestLogging();
 
+    app.UseRouting();
+    
     app.UseEndpoints(routes =>
     {
         routes.MapHub<ChatHub>("/chatHub");
@@ -147,6 +149,7 @@ try
         app.UseSwagger();
         app.UseSwaggerUI();
     }
+
     app.UseHttpsRedirection();
     app.UseAuthentication();
     app.UseAuthorization();
