@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.OutputCaching;
+﻿using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using WorkWaveApp.Application.Interfaces;
 using WorkWaveApp.Domain.Entities;
@@ -15,14 +15,16 @@ namespace WorkWaveApp.Infrastructure.Services
     {
         private readonly ApplicationDbContext _context;
         private readonly IConfiguration _configuration;
-        private readonly ICacheService _cacheService;
+        private readonly IDistributedCache _cache;
 
 
-        public VacancyService(ApplicationDbContext context, IConfiguration configuration, ICacheService cacheService)
+
+
+        public VacancyService(ApplicationDbContext context, IConfiguration configuration, IDistributedCache cache)
         {
             _context = context;
             _configuration = configuration;
-            _cacheService = cacheService;
+            _cache = cache;
         }
 
         public async Task<ServiceResult<AddVacancyCommandResponse>> AddVacancy(AddVacancyCommandRequest request)
@@ -118,15 +120,6 @@ namespace WorkWaveApp.Infrastructure.Services
                .AsNoTracking()
                .ToListAsync();
 
-            var cachedData = _cacheService.GetData<IEnumerable<Vacancy>>("vacancy");
-
-            var expirationTime = DateTimeOffset.Now.AddMinutes(5.0);
-
-            cachedData = allVacancies;
-
-            _cacheService.SetData<IEnumerable<Vacancy>>("vacancy", cachedData, expirationTime);
-
-
             var response = new GetAllVacanciesQueryResponse<Vacancy>
             {
                 Values = allVacancies
@@ -156,7 +149,7 @@ namespace WorkWaveApp.Infrastructure.Services
                 .Where(c => c.Id == Id)
                 .FirstOrDefaultAsync();
 
-            if(vacancy is null)
+            if (vacancy is null)
                 return ServiceResult<GetVacancyByQueryResponse<Vacancy>>.Error(ErrorCodesEnum.Null_Error);
 
 
