@@ -13,7 +13,7 @@ namespace WorkWaveApp.Infrastructure.Services
         }
         private void ConfigureRedis()
         {
-            ConnectionMultiplexer redis = ConnectionMultiplexer.Connect("localhost");
+            ConnectionMultiplexer redis = ConnectionMultiplexer.Connect("172.17.0.2:6379");
 
             _db = redis.GetDatabase();
         }

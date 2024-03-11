@@ -15,11 +15,14 @@ namespace WorkWaveApp.Infrastructure.Services
     {
         private readonly ApplicationDbContext _context;
         private readonly IConfiguration _configuration;
+        private readonly ICacheService _cacheService;
 
-        public VacancyService(ApplicationDbContext context, IConfiguration configuration)
+
+        public VacancyService(ApplicationDbContext context, IConfiguration configuration, ICacheService cacheService)
         {
             _context = context;
             _configuration = configuration;
+            _cacheService = cacheService;
         }
 
         public async Task<ServiceResult<AddVacancyCommandResponse>> AddVacancy(AddVacancyCommandRequest request)
@@ -114,6 +117,15 @@ namespace WorkWaveApp.Infrastructure.Services
                .Include(c => c.Education)
                .AsNoTracking()
                .ToListAsync();
+
+            var cachedData = _cacheService.GetData<IEnumerable<Vacancy>>("vacancy");
+
+            var expirationTime = DateTimeOffset.Now.AddMinutes(5.0);
+
+            cachedData = allVacancies;
+
+            _cacheService.SetData<IEnumerable<Vacancy>>("vacancy", cachedData, expirationTime);
+
 
             var response = new GetAllVacanciesQueryResponse<Vacancy>
             {

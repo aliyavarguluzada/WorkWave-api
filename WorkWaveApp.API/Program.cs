@@ -25,7 +25,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 
-
+builder.WebHost.UseKestrel(option => option.AddServerHeader = false);
 
 builder.Services.AddSignalR();
 
@@ -41,6 +41,7 @@ builder.Services.AddSwaggerGen(options =>
     });
     options.OperationFilter<SecurityRequirementsOperationFilter>();
 });
+
 
 
 builder.Services.AddApiVersioning(options =>
@@ -134,8 +135,10 @@ try
 
     var app = builder.Build();
 
-    app.UseSerilogRequestLogging();
+  
 
+    app.UseSerilogRequestLogging();
+    
     app.UseRouting();
     
     app.UseEndpoints(routes =>
@@ -147,11 +150,16 @@ try
     if (app.Environment.IsDevelopment())
     {
         app.UseSwagger();
-        app.UseSwaggerUI();
+        app.UseSwaggerUI(c =>
+        {
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "1");
+        });
     }
 
     app.UseHttpsRedirection();
+
     app.UseAuthentication();
+    
     app.UseAuthorization();
 
     app.MapControllers();

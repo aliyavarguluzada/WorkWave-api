@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -42,8 +43,10 @@ namespace WorkWaveApp.Infrastructure
             services.AddValidatorsFromAssemblyContaining<LoginCommandValidator>();
             services.AddValidatorsFromAssemblyContaining<RegisterCommandValidator>();
 
-
+            services.AddTransient<ICacheService, CacheService>();
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(LoginCommandValidator).Assembly));
+
+
 
 
 
