@@ -20,11 +20,10 @@ namespace WorkWaveApp.Infrastructure.Services
 
 
 
-        public VacancyService(ApplicationDbContext context, IConfiguration configuration, IDistributedCache cache)
+        public VacancyService(ApplicationDbContext context, IConfiguration configuration)
         {
             _context = context;
-            _configuration = configuration;
-            _cache = cache;
+            _configuration = configuration
         }
 
         public async Task<ServiceResult<AddVacancyCommandResponse>> AddVacancy(AddVacancyCommandRequest request)
