@@ -20,7 +20,7 @@ namespace WorkWaveApp.API.Controllers.v1
             => await Mediator.Send(new AddVacancyCommand(request));
 
         [HttpGet("getAllVacancies")]
-        public async Task<ServiceResult<GetAllVacanciesQueryResponse<Vacancy>>> GetAllVacancies()
+        public async Task<IEnumerable<Vacancy>> GetAllVacancies()
             => await Mediator.Send(new GetAllVacanciesQuery());
 
         [HttpPost("getVacancyById")]

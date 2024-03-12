@@ -15,6 +15,7 @@ namespace WorkWaveApp.Application.Interfaces
         Task<ServiceResult<AddVacancyCommandResponse>> AddVacancy(AddVacancyCommandRequest request);
         Task<ServiceResult<GetVacancyByQueryResponse<Vacancy>>> GetVacancyById(int Id);
         Task<ServiceResult<GetVacancyByQueryResponse<Vacancy>>> SearchVacancy(string VacancyName);
-        Task<ServiceResult<GetAllVacanciesQueryResponse<Vacancy>>> GetAllVacancies();
+        //Task<ServiceResult<GetAllVacanciesQueryResponse<Vacancy>>> GetAllVacancies();
+        Task<IEnumerable<Vacancy>> GetAllVacancies();
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using WorkWaveApp.Application.Interfaces;
 using WorkWaveApp.Domain.Entities;
@@ -15,15 +14,14 @@ namespace WorkWaveApp.Infrastructure.Services
     {
         private readonly ApplicationDbContext _context;
         private readonly IConfiguration _configuration;
-        private readonly IDistributedCache _cache;
+        private readonly ICacheService _cacheService;
 
 
-
-
-        public VacancyService(ApplicationDbContext context, IConfiguration configuration)
+        public VacancyService(ApplicationDbContext context, IConfiguration configuration, ICacheService cacheService)
         {
             _context = context;
             _configuration = configuration;
+            _cacheService = cacheService;
         }
 
         public async Task<ServiceResult<AddVacancyCommandResponse>> AddVacancy(AddVacancyCommandRequest request)
@@ -81,10 +79,10 @@ namespace WorkWaveApp.Infrastructure.Services
 
                 }
 
+                var addedobj = await _context.Vacancies.AddAsync(newVacancy);
+                var expiryTime = DateTime.Now.AddSeconds(30);
+                _cacheService.SetData<Vacancy>($"vacancy{addedobj}", addedobj.Entity, expiryTime);
 
-
-
-                await _context.Vacancies.AddAsync(newVacancy);
                 await transaction.CommitAsync();
                 await _context.SaveChangesAsync();
 
@@ -105,26 +103,36 @@ namespace WorkWaveApp.Infrastructure.Services
         }
 
         [OutputCache]
-        public async Task<ServiceResult<GetAllVacanciesQueryResponse<Vacancy>>> GetAllVacancies()
+        public async Task<IEnumerable<Vacancy>> GetAllVacancies()
         {
-            var allVacancies = await _context
-               .Vacancies
-               .OrderByDescending(c => c.Id)
-               .Include(c => c.Company)
-               .Include(c => c.City)
-               .Include(c => c.JobType)
-               .Include(c => c.JobCategory)
-               .Include(c => c.WorkForm)
-               .Include(c => c.Education)
-               .AsNoTracking()
-               .ToListAsync();
+            var cachedVacancies = _cacheService.GetData<IEnumerable<Vacancy>>("vacancies");
 
-            var response = new GetAllVacanciesQueryResponse<Vacancy>
-            {
-                Values = allVacancies
-            };
 
-            return ServiceResult<GetAllVacanciesQueryResponse<Vacancy>>.Ok(response);
+            if (cachedVacancies is not null && cachedVacancies.Count() > 0)
+                return cachedVacancies;
+
+
+
+            cachedVacancies = await _context
+                      .Vacancies
+                      //.OrderByDescending(c => c.Id)
+                      //.Include(c => c.Company)
+                      //.Include(c => c.City)
+                      //.Include(c => c.JobType)
+                      //.Include(c => c.JobCategory)
+                      //.Include(c => c.WorkForm)
+                      //.Include(c => c.Education)
+                      .AsNoTracking()
+                      .ToListAsync();
+
+
+            var expiryTime = DateTimeOffset.Now.AddSeconds(30);
+
+            _cacheService.SetData<IEnumerable<Vacancy>>("vacancies", cachedVacancies, expiryTime);
+
+
+
+            return cachedVacancies;
         }
 
         [OutputCache]

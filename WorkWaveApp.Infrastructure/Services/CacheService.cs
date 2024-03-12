@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
-using StackExchange.Redis;
+﻿using StackExchange.Redis;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using IDatabase = StackExchange.Redis.IDatabase;
 
 namespace WorkWaveApp.Infrastructure.Services
@@ -8,20 +8,23 @@ namespace WorkWaveApp.Infrastructure.Services
     internal class CacheService : ICacheService
     {
         private IDatabase _cacheDb;
-        private readonly IConfiguration _configuration;
-        public CacheService(IConfiguration configuration)
+
+        public CacheService()
         {
-            _configuration = configuration;
-            var redis = ConnectionMultiplexer.Connect(configuration.GetConnectionString("Redis"));
+            var redis = ConnectionMultiplexer.Connect("localhost:6379, abortConnect=false");
+            _cacheDb = redis.GetDatabase();
+
         }
 
         public T GetData<T>(string key)
         {
             var value = _cacheDb.StringGet(key);
+            var op = new JsonSerializerOptions();
+            op.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 
-            if (String.IsNullOrEmpty(value))
+            if (!string.IsNullOrEmpty(value))
             {
-                return JsonSerializer.Deserialize<T>(value);
+                return JsonSerializer.Deserialize<T>(value,op);
             }
             return default;
         }

@@ -103,7 +103,13 @@ builder.Services.AddAuthorization(options =>
 
 // code is for ignoring cycles otherwise an exception occurs
 builder.Services.AddControllers().AddJsonOptions(options =>
-                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+{
+
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    options.JsonSerializerOptions.MaxDepth = 128;
+
+});
 
 //builder.Services.AddAuthorization();
 
@@ -135,12 +141,12 @@ try
 
     var app = builder.Build();
 
-  
+
 
     app.UseSerilogRequestLogging();
-    
+
     app.UseRouting();
-    
+
     app.UseEndpoints(routes =>
     {
         routes.MapHub<ChatHub>("/chatHub");
@@ -159,12 +165,12 @@ try
     app.UseHttpsRedirection();
 
     app.UseAuthentication();
-    
+
     app.UseAuthorization();
 
     app.MapControllers();
 
-    app.UseOutputCache();
+    //app.UseOutputCache();
 
     app.Run();
 

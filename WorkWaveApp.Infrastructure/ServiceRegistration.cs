@@ -44,9 +44,9 @@ namespace WorkWaveApp.Infrastructure
             services.AddValidatorsFromAssemblyContaining<RegisterCommandValidator>();
 
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(LoginCommandValidator).Assembly));
+            services.AddScoped<ICacheService, CacheService>();
 
-
-            services.AddStackExchangeRedisCache(options=>
+            services.AddStackExchangeRedisCache(options =>
             {
                 options.Configuration = configuration.GetConnectionString("Redis");
                 options.InstanceName = "WorkWave_Redis";

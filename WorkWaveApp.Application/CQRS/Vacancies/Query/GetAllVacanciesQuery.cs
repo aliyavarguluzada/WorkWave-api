@@ -5,7 +5,7 @@ using WorkWaveAPP.Application.Core;
 
 namespace WorkWaveApp.Application.CQRS.Vacancies.Query
 {
-    public class GetAllVacanciesQuery : IRequest<ServiceResult<GetAllVacanciesQueryResponse<Vacancy>>>
+    public class GetAllVacanciesQuery : IRequest<IEnumerable<Vacancy>>
     {
         public int VacancyId { get; set; }
         public int VacancyStatusId { get; set; }
