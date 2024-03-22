@@ -5,6 +5,7 @@ using WorkWaveApp.Application.Interfaces;
 using WorkWaveApp.Domain.Entities;
 using WorkWaveApp.Domain.Enums;
 using WorkWaveApp.Infrastructure.Data;
+using WorkWaveApp.Models.Dtos;
 using WorkWaveApp.Models.v1.Vacancy.Request;
 using WorkWaveApp.Models.v1.Vacancy.Response;
 using WorkWaveAPP.Application.Core;
@@ -102,35 +103,51 @@ namespace WorkWaveApp.Infrastructure.Services
             }
         }
 
-        [OutputCache]
-        public async Task<IEnumerable<Vacancy>> GetAllVacancies()
+        public async Task<IEnumerable<GetAllVacancyDto>> GetAllVacancies()
         {
-            var cachedVacancies = _cacheService.GetData<IEnumerable<Vacancy>>("vacancies");
+            var vacancies = await _context
+                .Vacancies
+                .AsNoTracking()
+                .Select(c => new GetAllVacancyDto
+                {
+                    VacancyId = c.Id,
+                    VacancyLogo = c.Logo,
+                    VacancyName = c.Name,
+                    CreatedDate = (DateTime)c.CreatedDate,
+                    ExpiryDate = c.ExpireDate
+                })
+                .ToListAsync();
+
+            return vacancies;
+        }
+
+        [OutputCache]
+        public async Task<IEnumerable<GetAllVacancyDto>> GetAllVacanciesCached()
+        {
+
+            var cachedVacancies = _cacheService.GetData<IEnumerable<GetAllVacancyDto>>("vacancies");
 
 
             if (cachedVacancies is not null && cachedVacancies.Count() > 0)
                 return cachedVacancies;
 
 
-
             cachedVacancies = await _context
                       .Vacancies
-                      //.OrderByDescending(c => c.Id)
-                      //.Include(c => c.Company)
-                      //.Include(c => c.City)
-                      //.Include(c => c.JobType)
-                      //.Include(c => c.JobCategory)
-                      //.Include(c => c.WorkForm)
-                      //.Include(c => c.Education)
+                      .Select(c => new GetAllVacancyDto
+                      {
+                          VacancyId = c.Id,
+                          VacancyName = c.Name,
+                          CreatedDate = (DateTime)c.CreatedDate,
+                          ExpiryDate = c.ExpireDate
+                      })
                       .AsNoTracking()
                       .ToListAsync();
 
 
             var expiryTime = DateTimeOffset.Now.AddSeconds(30);
 
-            _cacheService.SetData<IEnumerable<Vacancy>>("vacancies", cachedVacancies, expiryTime);
-
-
+            var x = _cacheService.SetData<IEnumerable<GetAllVacancyDto>>("vacancies", cachedVacancies, expiryTime);
 
             return cachedVacancies;
         }

@@ -12,6 +12,7 @@ namespace WorkWaveApp.Infrastructure.Services
         public CacheService()
         {
             var redis = ConnectionMultiplexer.Connect("localhost:6379, abortConnect=false");
+
             _cacheDb = redis.GetDatabase();
 
         }
@@ -32,8 +33,10 @@ namespace WorkWaveApp.Infrastructure.Services
         public object RemoveData(string key)
         {
             var exists = _cacheDb.KeyExists(key);
+
             if (exists)
                 return _cacheDb.KeyDelete(key);
+
             return false;
         }
 
