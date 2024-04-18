@@ -1,3 +1,4 @@
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,11 +10,9 @@ using Swashbuckle.AspNetCore.Filters;
 using System.Text;
 using System.Text.Json.Serialization;
 using WorkWaveApp.Infrastructure;
-using WorkWaveApp.Infrastructure.Services.Hubs;
-
+using WorkWaveApp.Infrastructure.Adapters;
 
 var builder = WebApplication.CreateBuilder(args);
-
 
 
 builder.Services.AddInfrastructureServices(builder.Configuration);
@@ -21,13 +20,21 @@ builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
             policy.WithOrigins().AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
 
+
+
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 
+builder.Services.AddHealthChecks();
+
+builder.Services.ConfigureHealthChecks(builder.Configuration);
+
 builder.WebHost.UseKestrel(option => option.AddServerHeader = false);
 
-builder.Services.AddSignalR();
+
+
+
 
 builder.Services.AddSwaggerGen(options =>
 {
@@ -53,12 +60,12 @@ builder.Services.AddApiVersioning(options =>
 });
 
 
-builder.Services.AddOutputCache(options =>
-{
-    options.AddBasePolicy(builder =>
-        builder.Expire(TimeSpan.FromMinutes(15)));
+//builder.Services.AddOutputCache(options =>
+//{
+//    options.AddBasePolicy(builder =>
+//        builder.Expire(TimeSpan.FromMinutes(15)));
 
-});
+//});
 
 
 builder.Services.AddAuthentication(options =>
@@ -111,7 +118,6 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 
 });
 
-//builder.Services.AddAuthorization();
 
 builder.Services.AddCors();
 
@@ -127,6 +133,7 @@ try
 {
     var logger = new LoggerConfiguration()
         .ReadFrom.Configuration(configuration)
+
         .CreateLogger();
 
     builder.Logging.ClearProviders();
@@ -147,10 +154,10 @@ try
 
     app.UseRouting();
 
-    app.UseEndpoints(routes =>
-    {
-        routes.MapHub<ChatHub>("/chatHub");
-    });
+    //app.UseEndpoints(routes =>
+    //{
+    //    routes.MapHub<ChatHub>("/chatHub");
+    //});
 
 
     if (app.Environment.IsDevelopment())
@@ -169,6 +176,19 @@ try
     app.UseAuthorization();
 
     app.MapControllers();
+
+    app.MapHealthChecks("/api/v{api:apiVersion}/health", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions()
+    {
+        Predicate = _ => true,
+        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+    });
+
+    app.UseHealthChecksUI(delegate (HealthChecks.UI.Configuration.Options options)
+    {
+        options.UIPath = $"/api/v{1}/healthcheck-ui";
+        options.ApiPath = $"/api/v{1}/healthcheck-api";
+
+    });
 
     //app.UseOutputCache();
 

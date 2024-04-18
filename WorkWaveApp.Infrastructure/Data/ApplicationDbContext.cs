@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Serilog;
 using WorkWaveApp.Domain.Entities;
 using WorkWaveApp.Infrastructure.Data.Configuration;
+using WorkWaveApp.Infrastructure.Services;
 
 namespace WorkWaveApp.Infrastructure.Data
 {
@@ -31,7 +33,11 @@ namespace WorkWaveApp.Infrastructure.Data
             base.OnModelCreating(modelBuilder);
         }
 
-
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.AddInterceptors(new PerformanceInterceptor());
+            base.OnConfiguring(optionsBuilder);
+        }
 
         public virtual DbSet<RefreshToken> RefreshTokens { get; set; }
 

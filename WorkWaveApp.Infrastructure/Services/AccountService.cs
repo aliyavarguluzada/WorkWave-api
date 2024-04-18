@@ -21,6 +21,15 @@ namespace WorkWaveApp.Infrastructure.Services
             _context = context;
             _authService = authService;
         }
+
+        public async Task<List<User>> GetAllUsers()
+        {
+            var users = await _context
+                .Users
+                .ToListAsync();
+            return users;
+        }
+
         public async Task<ServiceResult<LoginResponse>> Login(LoginRequest request)
         {
             try

@@ -10,6 +10,7 @@ using WorkWaveApp.Application.CQRS.Vacancies.Query;
 using WorkWaveApp.Application.Interfaces;
 using WorkWaveApp.Infrastructure.Data;
 using WorkWaveApp.Infrastructure.Services;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace WorkWaveApp.Infrastructure
 {

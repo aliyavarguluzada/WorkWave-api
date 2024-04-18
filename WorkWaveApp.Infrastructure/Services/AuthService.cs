@@ -55,7 +55,7 @@ namespace WorkWaveApp.Infrastructure.Services
                 IsUsed = false,
                 UserId = user.Id,
                 AddedDate = DateTime.UtcNow,
-                ExpiryDate = DateTime.UtcNow.AddYears(1),
+                ExpiryDate = DateTime.UtcNow.AddMinutes(15),
                 IsRevoked = false,
                 Token = RefreshToken(25) + Guid.NewGuid()
             };

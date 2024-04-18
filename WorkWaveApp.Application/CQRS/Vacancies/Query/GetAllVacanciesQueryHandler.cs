@@ -5,7 +5,7 @@ using WorkWaveApp.Models.Dtos;
 
 namespace WorkWaveApp.Application.CQRS.Vacancies.Query
 {
-    public class GetAllVacanciesQueryHandler : IRequestHandler<GetAllVacanciesQuery, IEnumerable<GetAllVacancyDto>>
+    public class GetAllVacanciesQueryHandler : IRequestHandler<GetAllVacanciesQuery, IQueryable<GetAllVacancyDto>>
     {
         private readonly IVacancyService _vacancyService;
         public GetAllVacanciesQueryHandler(IVacancyService vacancyService)
@@ -13,7 +13,7 @@ namespace WorkWaveApp.Application.CQRS.Vacancies.Query
             _vacancyService = vacancyService;
         }
 
-        public async Task<IEnumerable<GetAllVacancyDto>> Handle(GetAllVacanciesQuery request, CancellationToken cancellationToken)
+        public async Task<IQueryable<GetAllVacancyDto>> Handle(GetAllVacanciesQuery request, CancellationToken cancellationToken)
              => await _vacancyService.GetAllVacancies();
 
 

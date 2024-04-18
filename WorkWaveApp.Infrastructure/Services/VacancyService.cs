@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.OutputCaching;
+﻿using BenchmarkDotNet.Running;
+using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Configuration;
+using System.ComponentModel;
 using WorkWaveApp.Application.Interfaces;
 using WorkWaveApp.Domain.Entities;
 using WorkWaveApp.Domain.Enums;
@@ -103,9 +106,9 @@ namespace WorkWaveApp.Infrastructure.Services
             }
         }
 
-        public async Task<IEnumerable<GetAllVacancyDto>> GetAllVacancies()
+        public async Task<IQueryable<GetAllVacancyDto>> GetAllVacancies()
         {
-            var vacancies = await _context
+            var vacancies = _context
                 .Vacancies
                 .AsNoTracking()
                 .Select(c => new GetAllVacancyDto
@@ -116,12 +119,23 @@ namespace WorkWaveApp.Infrastructure.Services
                     CreatedDate = (DateTime)c.CreatedDate,
                     ExpiryDate = c.ExpireDate
                 })
-                .ToListAsync();
+                .AsQueryable();
+
+            //var vacancies = await _context.Vacancies.ToListAsync();
+
+            //var vacancies = CompiledQuery(_context).ToList();
+
 
             return vacancies;
         }
 
-        [OutputCache]
+        public async Task<List<Vacancy>> GetVac()
+        {
+            var vacancies = await _context.Vacancies.ToListAsync();
+            return vacancies;
+
+        }
+
         public async Task<IEnumerable<GetAllVacancyDto>> GetAllVacanciesCached()
         {
 
@@ -161,14 +175,15 @@ namespace WorkWaveApp.Infrastructure.Services
 
             var vacancy = await _context
                 .Vacancies
-                .Include(c => c.Company)
-                .Include(c => c.City)
-                .Include(c => c.JobType)
-                .Include(c => c.JobCategory)
-                .Include(c => c.WorkForm)
-                .Include(c => c.Education)
-                .Include(c => c.CreatedDate)
-                .Include(c => c.UpdatedDate)
+                .TagWith("GetAllVacancies")
+                //.Include(c => c.Company)
+                //.Include(c => c.City)
+                //.Include(c => c.JobType)
+                //.Include(c => c.JobCategory)
+                //.Include(c => c.WorkForm)
+                //.Include(c => c.Education)
+                //.Include(c => c.CreatedDate)
+                //.Include(c => c.UpdatedDate)
                 .AsNoTracking()
                 .Where(c => c.Id == Id)
                 .FirstOrDefaultAsync();
@@ -206,6 +221,15 @@ namespace WorkWaveApp.Infrastructure.Services
             return ServiceResult<GetVacancyByQueryResponse<Vacancy>>.Ok(response);
         }
 
-
+        private static readonly Func<ApplicationDbContext, IEnumerable<GetAllVacancyDto>> CompiledQuery =
+            EF.CompileQuery((ApplicationDbContext context) =>
+                                    context.Vacancies.Select(c => new GetAllVacancyDto
+                                    {
+                                        VacancyId = c.Id,
+                                        VacancyLogo = c.Logo,
+                                        VacancyName = c.Name,
+                                        CreatedDate = (DateTime)c.CreatedDate,
+                                        ExpiryDate = c.ExpireDate
+                                    }));
     }
 }
