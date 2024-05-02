@@ -1,7 +1,4 @@
-﻿using FluentValidation;
-using WorkWaveApp.Models.v1.Account.Register;
-
-namespace WorkWaveApp.Application.CQRS.Account.Command.Register
+﻿namespace WorkWaveApp.Application.CQRS.Account.Command.Register
 {
     public class RegisterCommandValidator : AbstractValidator<RegisterCommand>
     {

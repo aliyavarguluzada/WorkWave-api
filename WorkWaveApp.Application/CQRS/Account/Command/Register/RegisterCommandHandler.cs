@@ -1,9 +1,4 @@
-﻿using FluentValidation;
-using MediatR;
-using WorkWaveApp.Application.Interfaces;
-using WorkWaveApp.Domain.Enums;
-using WorkWaveApp.Models.v1.Account.Register;
-using WorkWaveAPP.Application.Core;
+﻿
 
 namespace WorkWaveApp.Application.CQRS.Account.Command.Register
 {

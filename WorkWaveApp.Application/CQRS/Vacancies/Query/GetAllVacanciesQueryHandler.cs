@@ -1,9 +1,4 @@
-﻿using MediatR;
-using WorkWaveApp.Application.Interfaces;
-using WorkWaveApp.Domain.Entities;
-using WorkWaveApp.Models.Dtos;
-
-namespace WorkWaveApp.Application.CQRS.Vacancies.Query
+﻿namespace WorkWaveApp.Application.CQRS.Vacancies.Query
 {
     public class GetAllVacanciesQueryHandler : IRequestHandler<GetAllVacanciesQuery, IQueryable<GetAllVacancyDto>>
     {

@@ -1,15 +1,4 @@
-﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WorkWaveApp.Application.Interfaces;
-using WorkWaveAPP.Application.Core;
-using WorkWaveApp.Domain.Entities;
-using WorkWaveApp.Models.v1.Vacancy.Response;
-
-namespace WorkWaveApp.Application.CQRS.Vacancies.Query
+﻿namespace WorkWaveApp.Application.CQRS.Vacancies.Query
 {
     public class SearchVacancyQueryHandler : IRequestHandler<SearchVacancyQuery, ServiceResult<GetVacancyByQueryResponse<Vacancy>>>
     {

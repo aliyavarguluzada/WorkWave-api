@@ -1,10 +1,4 @@
-﻿using FluentValidation;
-using Microsoft.Extensions.DependencyInjection;
-using WorkWaveApp.Application.CQRS.Account.Command.Login;
-using WorkWaveApp.Application.CQRS.Account.Command.Register;
-using WorkWaveApp.Application.CQRS.Account.Command.Vacancy;
-using WorkWaveApp.Application.CQRS.Vacancies.Query;
-
+﻿
 namespace WorkWaveApp.Application
 {
     public static class ServiceRegistration
