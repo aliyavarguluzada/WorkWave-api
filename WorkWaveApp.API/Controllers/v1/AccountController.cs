@@ -1,14 +1,4 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel;
-using WorkWaveApp.Application.CQRS.Account.Command.Login;
-using WorkWaveApp.Application.CQRS.Account.Command.Register;
-using WorkWaveApp.Application.Interfaces;
-using WorkWaveApp.Domain.Entities;
-using WorkWaveApp.Models.v1.Account.Login;
-using WorkWaveApp.Models.v1.Account.Register;
-using WorkWaveAPP.Application.Core;
+﻿
 
 namespace WorkWaveApp.API.Controllers.v1
 {

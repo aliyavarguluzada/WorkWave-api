@@ -1,16 +1,4 @@
-using HealthChecks.UI.Client;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Versioning;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using Serilog;
-using Swashbuckle.AspNetCore.Filters;
-using System.Text;
-using System.Text.Json.Serialization;
-using WorkWaveApp.Infrastructure;
-using WorkWaveApp.Infrastructure.Adapters;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
