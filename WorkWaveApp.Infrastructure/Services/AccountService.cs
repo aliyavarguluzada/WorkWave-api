@@ -1,14 +1,4 @@
-﻿using FluentValidation;
-using Microsoft.EntityFrameworkCore;
-using Serilog;
-using WorkWaveApp.Application.Interfaces;
-using WorkWaveApp.Domain.Entities;
-using WorkWaveApp.Domain.Enums;
-using WorkWaveApp.Infrastructure.Data;
-using WorkWaveApp.Models.v1.Account.Login;
-using WorkWaveApp.Models.v1.Account.Register;
-using WorkWaveAPP.Application.Core;
-
+﻿
 namespace WorkWaveApp.Infrastructure.Services
 {
     public class AccountService : IAccountService

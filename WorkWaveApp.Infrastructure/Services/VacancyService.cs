@@ -1,17 +1,8 @@
-﻿using BenchmarkDotNet.Running;
-using Microsoft.AspNetCore.OutputCaching;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.Extensions.Configuration;
-using System.ComponentModel;
-using WorkWaveApp.Application.Interfaces;
-using WorkWaveApp.Domain.Entities;
-using WorkWaveApp.Domain.Enums;
-using WorkWaveApp.Infrastructure.Data;
+﻿using Microsoft.AspNetCore.OutputCaching;
 using WorkWaveApp.Models.Dtos;
 using WorkWaveApp.Models.v1.Vacancy.Request;
 using WorkWaveApp.Models.v1.Vacancy.Response;
-using WorkWaveAPP.Application.Core;
+
 namespace WorkWaveApp.Infrastructure.Services
 {
     public class VacancyService : IVacancyService

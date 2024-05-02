@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Microsoft.Extensions.Options;
-
+﻿
 namespace WorkWaveApp.Infrastructure.Adapters
 {
     public class MemoryHealthCheck : IHealthCheck

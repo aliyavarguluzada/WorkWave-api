@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore.Diagnostics;
-using Serilog;
 using System.Data.Common;
 using System.Diagnostics;
 
