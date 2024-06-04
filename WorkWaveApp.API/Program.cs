@@ -64,6 +64,7 @@ builder.Services.AddAuthentication(options =>
 
 }).AddJwtBearer(opt =>
 {
+    opt.RequireHttpsMetadata = false; // must be set true prior to deploy
     opt.TokenValidationParameters = new TokenValidationParameters
     {
         ValidIssuer = builder.Configuration["JWTSettings:Issuer"],
