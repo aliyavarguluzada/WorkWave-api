@@ -26,33 +26,26 @@ namespace WorkWaveApp.API.Controllers.v1
             _vacancyService = vacancyService;
         }
 
-        [HttpPost("addVacancy"), Authorize(Roles = "company")]
-        public async Task<ServiceResult<AddVacancyCommandResponse>> AddVacancy([FromForm] AddVacancyCommandRequest request)
+        [HttpPost("vacancies"), Authorize(Roles = "company")]
+        public async Task<ServiceResult<AddVacancyCommandResponse>> Add([FromForm] AddVacancyCommandRequest request)
             => await Mediator.Send(new AddVacancyCommand(request));
 
-        [HttpGet("getAllVacanciesCached")]
-        public async Task<IEnumerable<GetAllVacancyDto>> GetAllVacanciesCached()
+        [HttpGet("vacanciesCached")]
+        public async Task<IEnumerable<GetAllVacancyDto>> VacanciesCached()
             => await Mediator.Send(new GetAllVacanciesQueryCached());
 
-        [HttpGet("getAllVacancies")]
-        public async Task<IQueryable<GetAllVacancyDto>> GetAllVacancies()
+        [HttpGet("vacancies")]
+        public async Task<IQueryable<GetAllVacancyDto>> getAll()
             => await Mediator.Send(new GetAllVacanciesQuery());
 
-        [HttpGet("getVac")]
-        public async Task<List<Vacancy>> GetVac()
-        {
-            var vacancies = await _vacancyService.GetVac();
 
-            return vacancies;
-        }
-
-        [HttpPost("getVacancyById")]
-        public async Task<ServiceResult<GetVacancyByQueryResponse<Vacancy>>> GetVacancyById([FromBody] int id)
+        [HttpGet("vacancies/{id}")]
+        public async Task<ServiceResult<GetVacancyByQueryResponse<Vacancy>>> GetById([FromQuery] int id)
             => await Mediator.Send(new GetVacancyByIdQuery(id));
 
-        [HttpPost("searchVacancy")]
-        public async Task<ServiceResult<GetVacancyByQueryResponse<Vacancy>>> SearchVacancy([FromBody] string vacancyName)
-            => await Mediator.Send(new SearchVacancyQuery(vacancyName));
+        [HttpGet("vacancies/search")]
+        public async Task<ServiceResult<GetVacancyByQueryResponse<Vacancy>>> Search([FromBody] string name)
+            => await Mediator.Send(new SearchVacancyQuery(name));
 
 
     }

@@ -21,8 +21,8 @@ namespace WorkWaveApp.API.Controllers.v1
         public async Task<ServiceResult<LoginResponse>> Login([FromBody] LoginRequest request)
             => await Mediator.Send(new LoginCommand(request));
 
-        [HttpGet("GetUsers")]
-        public async Task<List<User>> GetUsers()
+        [HttpGet("users")]
+        public async Task<List<User>> Users()
         {
             var users = await accountService.GetAllUsers();
             return users;

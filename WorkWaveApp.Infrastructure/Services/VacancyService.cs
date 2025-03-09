@@ -109,8 +109,7 @@ namespace WorkWaveApp.Infrastructure.Services
                     VacancyName = c.Name,
                     CreatedDate = (DateTime)c.CreatedDate,
                     ExpiryDate = c.ExpireDate
-                })
-                .AsQueryable();
+                });
 
             //var vacancies = await _context.Vacancies.ToListAsync();
 
@@ -120,12 +119,7 @@ namespace WorkWaveApp.Infrastructure.Services
             return vacancies;
         }
 
-        public async Task<List<Vacancy>> GetVac()
-        {
-            var vacancies = await _context.Vacancies.ToListAsync();
-            return vacancies;
 
-        }
 
         public async Task<IEnumerable<GetAllVacancyDto>> GetAllVacanciesCached()
         {

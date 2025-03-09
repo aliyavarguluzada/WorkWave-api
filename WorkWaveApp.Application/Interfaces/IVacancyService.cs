@@ -9,6 +9,5 @@ namespace WorkWaveApp.Application.Interfaces
         //Task<ServiceResult<GetAllVacanciesQueryResponse<Vacancy>>> GetAllVacancies();
         Task<IEnumerable<GetAllVacancyDto>> GetAllVacanciesCached();
         Task<IQueryable<GetAllVacancyDto>> GetAllVacancies();
-        Task<List<Vacancy>> GetVac();
     }
 }

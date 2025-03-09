@@ -48,13 +48,6 @@ builder.Services.AddApiVersioning(options =>
 });
 
 
-//builder.Services.AddOutputCache(options =>
-//{
-//    options.AddBasePolicy(builder =>
-//        builder.Expire(TimeSpan.FromMinutes(15)));
-
-//});
-
 
 builder.Services.AddAuthentication(options =>
 {
@@ -64,7 +57,7 @@ builder.Services.AddAuthentication(options =>
 
 }).AddJwtBearer(opt =>
 {
-    opt.RequireHttpsMetadata = false; // must be set true prior to deploy
+    opt.RequireHttpsMetadata = false; // must be set to true prior to deploy
     opt.TokenValidationParameters = new TokenValidationParameters
     {
         ValidIssuer = builder.Configuration["JWTSettings:Issuer"],
@@ -143,10 +136,6 @@ try
 
     app.UseRouting();
 
-    //app.UseEndpoints(routes =>
-    //{
-    //    routes.MapHub<ChatHub>("/chatHub");
-    //});
 
 
     if (app.Environment.IsDevelopment())
@@ -179,7 +168,6 @@ try
 
     });
 
-    //app.UseOutputCache();
 
     app.Run();
 
@@ -190,5 +178,5 @@ catch (Exception ex)
 }
 finally
 {
-    Log.CloseAndFlushAsync();
+    await Log.CloseAndFlushAsync();
 }

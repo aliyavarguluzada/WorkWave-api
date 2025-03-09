@@ -1,16 +1,7 @@
-﻿using FluentValidation;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using WorkWaveApp.Application.CQRS.Account.Command.Login;
+﻿using WorkWaveApp.Application.CQRS.Account.Command.Login;
 using WorkWaveApp.Application.CQRS.Account.Command.Register;
 using WorkWaveApp.Application.CQRS.Account.Command.Vacancy;
 using WorkWaveApp.Application.CQRS.Vacancies.Query;
-using WorkWaveApp.Application.Interfaces;
-using WorkWaveApp.Infrastructure.Data;
-using WorkWaveApp.Infrastructure.Services;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace WorkWaveApp.Infrastructure
 {
